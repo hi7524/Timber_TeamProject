@@ -24,7 +24,7 @@ public:
 
 	void SetPosition(const sf::Vector2f& pos) override;
 	Sides UpdateBranches();
-	void UpdateLog();
+	
 
 	Sides GetSide() const { return branchesSide[branchesSide.size() - 1]; }
 
