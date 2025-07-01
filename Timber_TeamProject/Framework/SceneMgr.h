@@ -9,11 +9,13 @@ protected:
 
 	std::vector<Scene*> scenes;
 
-	SceneIds startScene = SceneIds::Game;
+	SceneIds startScene = SceneIds::Title;
 	SceneIds currentScene = SceneIds::None;
 	SceneIds nextScene = SceneIds::None;
 
 public:
+	std::string selectedPlayer;
+
 	void Init();
 	void Release();
 
@@ -26,4 +28,3 @@ public:
 };
 
 #define SCENE_MGR (SceneMgr::Instance())
-

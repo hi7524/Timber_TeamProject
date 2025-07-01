@@ -6,6 +6,7 @@ class TextGo : public GameObject
 protected:
 	sf::Text text;
 	std::string fontId;
+	sf::Color color;
 
 public:
 	TextGo(const std::string& fontId = "", const std::string& name = "");
@@ -16,7 +17,8 @@ public:
 
 	void SetString(const std::string& str);
 	void SetCharacterSize(unsigned int size);
-	void SetFillColor(const sf::Color& color);
+	void SetFillColor(const sf::Color& c);
+	sf::Color GetFillColor() { return color; };
 	std::string GetString() const;
 
 	sf::Text& GetText() { return text; }
