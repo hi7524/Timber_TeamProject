@@ -1,5 +1,7 @@
 #pragma once
 #include "GameObject.h"
+
+
 class Tree : public GameObject
 {
 protected:
@@ -25,4 +27,3 @@ public:
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
 };
-
