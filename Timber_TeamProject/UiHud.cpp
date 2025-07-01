@@ -15,15 +15,6 @@ void UiHud::SetScore(int score)
 
 void UiHud::SetMessage(const std::string& msg)
 {
-
-	if ()
-	{
-
-	}
-	if (SceneId)
-	{
-
-	}
 	textMessage.setString(msg);
 	Utils::SetOrigin(textMessage, Origins::MC);
 }

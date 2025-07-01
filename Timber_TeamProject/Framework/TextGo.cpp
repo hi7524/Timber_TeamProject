@@ -21,6 +21,7 @@ void TextGo::SetCharacterSize(unsigned int size)
 void TextGo::SetFillColor(const sf::Color& color)
 {
 	text.setFillColor(color);
+	this->color = color;
 }
 
 std::string TextGo::GetString() const

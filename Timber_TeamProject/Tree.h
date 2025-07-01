@@ -4,11 +4,19 @@ class Tree : public GameObject
 {
 protected:
 	sf::Sprite tree;
+
+	int logIdxCount = 0;
+	float logSpeed = 2000.f;
+	std::vector<sf::Sprite> logs;
+	std::vector<Sides> logSide;
+	std::vector<bool> isLogActive;
+
 	std::vector<sf::Sprite> branches;
 	std::vector<Sides> branchesSide;
 
 	std::string texIdTree;
 	std::string texIdBranch;
+	std::string texIdLog;
 
 public:
 	Tree() = default;
@@ -16,6 +24,7 @@ public:
 
 	void SetPosition(const sf::Vector2f& pos) override;
 	Sides UpdateBranches();
+
 
 	Sides GetSide() const { return branchesSide[branchesSide.size() - 1]; }
 
@@ -25,4 +34,3 @@ public:
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
 };
-

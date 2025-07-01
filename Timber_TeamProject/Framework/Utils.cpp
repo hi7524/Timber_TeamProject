@@ -18,7 +18,7 @@ float Utils::RandomValue()
 int Utils::RandomRange(int min, int maxExclude)
 {
     std::uniform_int_distribution<int> dist(min, maxExclude - 1);
-	return dist(gen);
+    return dist(gen);
 }
 
 float Utils::RandomRange(float min, float max)
