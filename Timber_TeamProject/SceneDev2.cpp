@@ -61,7 +61,7 @@ void SceneDev2::Enter()
 {
 	Scene::Enter();
 
-	// 플레이 모드에 따른 설정
+	// 플레이 모드에 따른 설정 (**임시 변수 → 수정할 것)
 	if (playMode == "Normal")
 	{
 		timerMax = 5.0f; // 5초
@@ -74,7 +74,6 @@ void SceneDev2::Enter()
 	// 나무 위치 설정
 	sf::Vector2f windowW = FRAMEWORK.GetWindowSizeF();
 	float treeOffset = 400.0f;
-	
 	sf::Vector2f tree1Pos = { windowW.x * 0.5f - treeOffset, 0.0f };
 	sf::Vector2f tree2Pos = { windowW.x * 0.5f + treeOffset, 0.0f };
 
@@ -92,19 +91,79 @@ void SceneDev2::Enter()
 
 	// UI
 	timer = timerMax;
-	//uiHud2->SetTimeBar(timer / timerMax);
+	uiHud2->SetTimeBar(timer / timerMax);
 }
 
 void SceneDev2::Update(float dt)
 {
 	Scene::Update(dt);
 
+	// 일시정지 및 재개
+	if (InputMgr::GetKeyDown(sf::Keyboard::Return))
+	{
+		isPlaying = !isPlaying; 
+		
+		if (timer <= 0)
+		{
+			timer = timerMax;
+		}
+		else
+		{
+			if (isPlaying)
+			{
+				uiHud2->SetShowTitle(false);
+				uiHud2->SetShowDetail(false);
+			}
+			else
+			{
+				uiHud2->SetTitleMessage("Pause");
+				uiHud2->SetDetailMessage("Press Enter Key to Restart");
+				uiHud2->SetShowTitle(true);
+				uiHud2->SetShowDetail(true);
+			}
+		}
+	}
+
 	if (isPlaying)
 	{
-		if (InputMgr::GetKeyDown(sf::Keyboard::Space))
+		// 플레이
+		FRAMEWORK.SetTimeScale(1);
+		timer -= dt;
+
+		// 타이머
+		uiHud2->SetTimeBar(timer / timerMax);
+
+		// 제한시간 마감 후
+		if (timer <= 0)
 		{
-			//SCENE_MGR.ChangeScene(SceneIds::Dev1);
+			timer = 0;
+			isPlaying = false;
+
+			// 점수에 따른 결과 출력
+			if (score1 > score2)
+			{
+				uiHud2->SetTitleMessage("Player 1 Winner!");
+				uiHud2->SetDetailMessage("1st Player 1: " + std::to_string(score1) + "\n2nd Player 2: " + std::to_string(score2));
+			}
+			else if (score1 < score2)
+			{
+				uiHud2->SetTitleMessage("Player 2 Winner!");
+				uiHud2->SetDetailMessage("1st Player 2: " + std::to_string(score2) + "\n2nd Player 1: " + std::to_string(score1));
+			}
+			else
+			{
+				uiHud2->SetTitleMessage("Draw!");
+			}
+
+			uiHud2->SetShowTitle(true);
+			uiHud2->SetShowDetail(true);
 		}
+		else
+		{
+			uiHud2->SetShowTitle(false);
+			uiHud2->SetShowDetail(false);
+		}
+
 
 		// 플레이어 1 조작
 		if (InputMgr::GetKeyDown(sf::Keyboard::A))
@@ -112,14 +171,45 @@ void SceneDev2::Update(float dt)
 			tree1->UpdateBranches();
 			player1->SetSide(Sides::Left);
 
-			// 테스트 코드
-			score1 += 10;
+			// 충돌 체크
+			if (tree1->GetSide() == player1->GetSide())
+			{
+				score1 -= 20;
+				if (score1 <= 0)
+				{
+					score1 = 0;
+				}
+			}
+			else
+			{
+				score1 += 10;
+			}
+
+			// Score UI 업데이트
 			uiHud2->SetScore(score1, 1);
 		}
+
 		if (InputMgr::GetKeyDown(sf::Keyboard::D))
 		{
 			tree1->UpdateBranches();
 			player1->SetSide(Sides::Right);
+
+			// 충돌 체크
+			if (tree1->GetSide() == player1->GetSide())
+			{
+				score1 -= 20;
+				if (score1 <= 0)
+				{
+					score1 = 0;
+				}
+			}
+			else
+			{
+				score1 += 10;
+			}
+
+			// Score UI 업데이트
+			uiHud2->SetScore(score1, 1);
 		}
 
 
@@ -128,20 +218,51 @@ void SceneDev2::Update(float dt)
 		{
 			tree2->UpdateBranches();
 			player2->SetSide(Sides::Left);
-			
-			// 테스트 코드
-			score2 += 10;
+
+			// 충돌 체크
+			if (tree2->GetSide() == player2->GetSide())
+			{
+				score2 -= 20;
+				if (score2 <= 0)
+				{
+					score2 = 0;
+				}
+			}
+			else
+			{
+				score2 += 10;
+			}
+
+			// Score UI 업데이트
 			uiHud2->SetScore(score2, 2);
 		}
+
 		if (InputMgr::GetKeyDown(sf::Keyboard::Right))
 		{
 			tree2->UpdateBranches();
 			player2->SetSide(Sides::Right);
+
+			// 충돌 체크
+			if (tree2->GetSide() == player2->GetSide())
+			{
+				score2 -= 20;
+				if (score2 <= 0)
+				{
+					score2 = 0;
+				}
+			}
+			else
+			{
+				score2 += 10;
+			}
+
+			// Score UI 업데이트
+			uiHud2->SetScore(score2, 2);
 		}
-
-		// 충돌 체크
-
-		// 한 쪽이 먼저 죽어도 이김
-		// 시간이 끝까지 갔을때는 점수가 더 높은 쪽이 이김
+	}
+	else
+	{
+		// 플레이 정지
+		FRAMEWORK.SetTimeScale(0);
 	}
 }

@@ -23,7 +23,7 @@ protected:
 	float timerMax = 5.0f;
 
 	// 임시변수! 병합 후 수정할 것
-	std::string playMode = "normal";
+	std::string playMode = "Hard";
 
 public:
 	SceneDev2();

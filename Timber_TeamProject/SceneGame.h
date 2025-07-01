@@ -10,7 +10,7 @@ class SceneGame : public Scene
 protected:
 	Player* player;
 	Tree* tree;
-	UiHud* uiHud2;
+	UiHud* uiHud;
 
 	bool isPlaying = false;
 	int score = 0;

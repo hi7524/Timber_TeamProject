@@ -53,7 +53,7 @@ void SceneGame::Init()
 
     player = (Player*)AddGameObject(new Player());
 
-    uiHud2 = (UiHud*)AddGameObject(new UiHud());
+    uiHud = (UiHud*)AddGameObject(new UiHud());
 
     Scene::Init();
 }
@@ -67,13 +67,13 @@ void SceneGame::Enter()
     player->SetPosition(pos);
 
     score = 0;
-    uiHud2->SetScore(score);
+    uiHud->SetScore(score);
 
     timer = timerMax;
-    uiHud2->SetTimeBar(timer / timerMax);
+    uiHud->SetTimeBar(timer / timerMax);
 
-    uiHud2->SetShowMassage(true);
-    uiHud2->SetMessage("Enter to Start!");
+    uiHud->SetShowMassage(true);
+    uiHud->SetMessage("Enter to Start!");
 }
 
 void SceneGame::Exit()
@@ -97,13 +97,13 @@ void SceneGame::Update(float dt)
                 FRAMEWORK.SetTimeScale(0.f);
                 player->SetAlive(false);
 
-                uiHud2->SetShowMassage(true);
-                uiHud2->SetMessage("Enter to Restart!");
+                uiHud->SetShowMassage(true);
+                uiHud->SetMessage("Enter to Restart!");
             }
             else
             {
                 score += 10;
-                uiHud2->SetScore(score);
+                uiHud->SetScore(score);
             }
         }
 
@@ -117,13 +117,13 @@ void SceneGame::Update(float dt)
                 FRAMEWORK.SetTimeScale(0.f);
                 player->SetAlive(false);
 
-                uiHud2->SetShowMassage(true);
-                uiHud2->SetMessage("Enter to Restart!");
+                uiHud->SetShowMassage(true);
+                uiHud->SetMessage("Enter to Restart!");
             }
             else
             {
                 score += 10;
-                uiHud2->SetScore(score);
+                uiHud->SetScore(score);
             }
         }
 
@@ -139,10 +139,10 @@ void SceneGame::Update(float dt)
             FRAMEWORK.SetTimeScale(0.f);
             player->SetAlive(false);
 
-            uiHud2->SetShowMassage(true);
-            uiHud2->SetMessage("Enter to Restart!");
+            uiHud->SetShowMassage(true);
+            uiHud->SetMessage("Enter to Restart!");
         }
-        uiHud2->SetTimeBar(timer / timerMax);
+        uiHud->SetTimeBar(timer / timerMax);
     }
     else
     {
@@ -154,12 +154,12 @@ void SceneGame::Update(float dt)
             isPlaying = true;
 
             score = 0;
-            uiHud2->SetScore(score);
+            uiHud->SetScore(score);
 
             timer = timerMax;
-            uiHud2->SetTimeBar(timer / timerMax);
+            uiHud->SetTimeBar(timer / timerMax);
 
-            uiHud2->SetShowMassage(false);
+            uiHud->SetShowMassage(false);
         }
     }
 
