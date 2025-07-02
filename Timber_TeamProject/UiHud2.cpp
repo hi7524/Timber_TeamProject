@@ -53,8 +53,8 @@ void UiHud2::Init()
 	sf::FloatRect bounds = FRAMEWORK.GetWindowBounds();
 
 	// 텍스트 UI 설정
-	//Utils::SetOrigin(textScore1, Origins::TL);
-	//Utils::SetOrigin(textScore2, Origins::TR);
+	Utils::SetOrigin(textScore1, Origins::TL);
+	Utils::SetOrigin(textScore2, Origins::TR);
 
 	textScore1.setCharacterSize(50);
 	textScore2.setCharacterSize(50);
@@ -91,6 +91,12 @@ void UiHud2::Reset()
 
 	SetScore(0, 1);
 	SetScore(0, 2);
+
+	Utils::SetOrigin(textScore1, Origins::TL);
+	Utils::SetOrigin(textScore2, Origins::TR);
+
+	textScore1.setPosition(20, 20);
+	textScore2.setPosition(1920 - 20, 20);
 }
 
 void UiHud2::Update(float dt)
