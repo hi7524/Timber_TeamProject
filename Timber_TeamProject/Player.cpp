@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "Player.h"
 
-Player::Player(const std::string& name)
-	: GameObject(name)
+Player::Player(const std::string& textureId)
+	: GameObject("Player"), playerTexId(textureId)
 {
 }
 
@@ -11,7 +11,7 @@ void Player::SetAlive(bool alive)
 	isAlive = alive;
 	if (isAlive)
 	{
-		sprite.setTexture(TEXTURE_MGR.Get(texPlayerId));
+		sprite.setTexture(TEXTURE_MGR.Get(playerTexId));
 	}
 	else
 	{
@@ -42,7 +42,10 @@ void Player::SetPosition(const sf::Vector2f& pos)
 
 void Player::Init()
 {
-	texPlayerId = "graphics/player.png";
+	if (playerTexId.empty())
+	{
+		playerTexId = "graphics/player.png";
+	}
 	axeTexId = "graphics/axe.png";
 	ripTexId = "graphics/rip.png";
 
@@ -64,7 +67,7 @@ void Player::Release()
 
 void Player::Reset()
 {
-	sprite.setTexture(TEXTURE_MGR.Get(texPlayerId));
+	sprite.setTexture(TEXTURE_MGR.Get(playerTexId));
 	Utils::SetOrigin(sprite, Origins::BC);
 
 	axe.setTexture(TEXTURE_MGR.Get(axeTexId));

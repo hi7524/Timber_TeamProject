@@ -13,7 +13,7 @@ protected:
 public:
 	SceneTitle();
 
+	void ChangeScene();
 	void Init() override;
 	void Update(float dt) override;
 };
-

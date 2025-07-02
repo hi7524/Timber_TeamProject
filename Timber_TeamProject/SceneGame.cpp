@@ -25,7 +25,7 @@ void SceneGame::Init()
     texIds.push_back("graphics/log.png");
     texIds.push_back("graphics/tree.png");
     texIds.push_back("graphics/branch.png");
-    texIds.push_back("graphics/player.png");
+    texIds.push_back(SCENE_MGR.selectedPlayer);
     texIds.push_back("graphics/axe.png");
     texIds.push_back("graphics/rip.png");
 
@@ -51,7 +51,9 @@ void SceneGame::Init()
     element->maxSpeed = 600;
     element->SetMoveType(BackgroundElement::MoveType::Wave);
 
-    player = (Player*)AddGameObject(new Player());
+    player = (Player*)AddGameObject(new Player(SCENE_MGR.selectedPlayer));
+
+   
     log = (Log*)AddGameObject(new Log());
     uiHud = (UiHud*)AddGameObject(new UiHud());
 
@@ -61,7 +63,7 @@ void SceneGame::Init()
 void SceneGame::Enter()
 {
     Scene::Enter();
-
+    
     sf::Vector2f pos = tree->GetPosition();
     pos.y = 950.f;
     player->SetPosition(pos);
