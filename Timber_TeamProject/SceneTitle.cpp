@@ -18,7 +18,7 @@ void SceneTitle::Init()
 	sf::Vector2f multiPlayPos = { bounds.width * 0.8f,bounds.height * 0.8f };
 
 	fontIds.push_back("fonts/KOMIKAP_.ttf");
-	texIds.push_back("graphics/background.png");
+	texIds.push_back("graphics/Title.png");
 
 
 	title->SetString("TIM BER");
@@ -48,7 +48,7 @@ void SceneTitle::Init()
 	multiPlay->SetPosition(multiPlayPos);
 
 
-	AddGameObject(new SpriteGo("graphics/background.png"));
+	AddGameObject(new SpriteGo("graphics/Title.png"));
 	AddGameObject(title);
 	AddGameObject(teamName);
 	AddGameObject(singlePlay);
