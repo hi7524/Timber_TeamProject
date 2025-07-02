@@ -8,12 +8,19 @@
 #include "UiHud.h"
 #include "Log.h"
 
+float SceneGame::timerMax = 0.f;
 SceneGame::SceneGame() : Scene(SceneIds::Game)
 {
 }
 
 SceneGame::~SceneGame()
 {
+}
+
+void SceneGame::SetTimerMax(const float& time)
+{
+    timerMax = time;
+    
 }
 
 void SceneGame::Init()
@@ -101,12 +108,17 @@ void SceneGame::Update(float dt)
                 player->SetAlive(false);
 
                 uiHud->SetShowMassage(true);
-                uiHud->SetMessage("Enter to Restart!");
+                uiHud->SetMessage("\t  Enter to Restart! \n Press Q to return to Title");
             }
             else
             {
                 score += 10;
                 uiHud->SetScore(score);
+                timer += 0.5f;
+                if (timer > timerMax)
+                {
+                    timer = timerMax;
+                }
             }
         }
 
@@ -121,35 +133,43 @@ void SceneGame::Update(float dt)
                 player->SetAlive(false);
 
                 uiHud->SetShowMassage(true);
-                uiHud->SetMessage("Enter to Restart!");
+                uiHud->SetMessage("\t  Enter to Restart! \n Press Q to return to Title");
             }
             else
             {
                 score += 10;
                 uiHud->SetScore(score);
+                timer += 0.5f;
+                if (timer > timerMax)
+                {
+                    timer = timerMax;
+                }
             }
         }
 
-        player->SetDrawAxe(
-            InputMgr::GetKey(sf::Keyboard::Left) || InputMgr::GetKey(sf::Keyboard::Right));
-     
+        player->SetDrawAxe(InputMgr::GetKey(sf::Keyboard::Left) || InputMgr::GetKey(sf::Keyboard::Right));
+        
         timer -= dt;
         if (timer <= 0.f)
         {
             timer = 0.f;
-
             isPlaying = false;
             FRAMEWORK.SetTimeScale(0.f);
             player->SetAlive(false);
 
             uiHud->SetShowMassage(true);
-            uiHud->SetMessage("Enter to Restart!");
-            
+            uiHud->SetMessage("\t  Enter to Restart! \n Press Q to return to Title");
         }
         uiHud->SetTimeBar(timer / timerMax);
+        
+        
     }
     else
     {
+       /* if (InputMgr::GetKeyDown(sf::Keyboard::Q))
+        {
+            SCENE_MGR.ChangeScene(SceneIds::Title);
+        }*/
         if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
         {
             FRAMEWORK.SetTimeScale(1.f);

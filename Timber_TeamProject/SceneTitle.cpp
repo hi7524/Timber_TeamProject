@@ -3,6 +3,7 @@
 #include "TextGo.h"
 #include "SpriteGo.h"
 
+
 SceneTitle::SceneTitle()
 	: Scene(SceneIds::Title)
 {
@@ -77,6 +78,7 @@ void SceneTitle::Update(float dt)
 		}
 		else if (multiPlay->GetFillColor() == sf::Color::Red)
 		{
+			
 			SCENE_MGR.ChangeScene(SceneIds::Multi);
 		}
 	}

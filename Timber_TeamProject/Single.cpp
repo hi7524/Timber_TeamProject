@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Single.h"
 #include "SpriteGo.h"
+#include "SceneTitle.h"
 
 Single::Single() : Scene(SceneIds::Single)
 {
@@ -9,6 +10,7 @@ Single::Single() : Scene(SceneIds::Single)
 void Single::ChangeScene()
 {
 }
+
 
 void Single::Init()
 {
@@ -72,26 +74,33 @@ void Single::Init()
 
 void Single::Update(float dt)
 {
-    if (InputMgr::GetKeyDown(sf::Keyboard::Left)) {
+    if (InputMgr::GetKeyDown(sf::Keyboard::Left)) 
+    {
         if (selectedIndex > 0) selectedIndex--;
     }
-    if (InputMgr::GetKeyDown(sf::Keyboard::Right)) {
+    if (InputMgr::GetKeyDown(sf::Keyboard::Right)) 
+    {
         if (selectedIndex < playerNames.size() - 1) selectedIndex++;
     }
 
-    for (int i = 0; i < playerNames.size(); ++i) {
-        if (i == selectedIndex) {
+    for (int i = 0; i < playerNames.size(); ++i) 
+    {
+        if (i == selectedIndex) 
+        {
             playerNames[i]->SetFillColor(sf::Color::Red);
         }
-        else {
+        else 
+        {
             playerNames[i]->SetFillColor(sf::Color::White);
         }
     }
 
-    if (InputMgr::GetKeyDown(sf::Keyboard::Return)) {
-        if (selectedIndex >= 0 && selectedIndex < playerTextures.size()) {
+    if (InputMgr::GetKeyDown(sf::Keyboard::Return)) 
+    {
+        if (selectedIndex >= 0 && selectedIndex < playerTextures.size()) 
+        {
             SCENE_MGR.selectedPlayer = playerTextures[selectedIndex];
-            SCENE_MGR.ChangeScene(SceneIds::SelectMod);
+            SCENE_MGR.ChangeScene(SceneIds::Difficulty);
         }
     }
 }

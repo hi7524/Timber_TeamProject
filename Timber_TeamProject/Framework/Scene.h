@@ -26,7 +26,7 @@ public:
 
 	GameObject* AddGameObject(GameObject* go);
 	void RemoveGameObject(GameObject* go);
-
+	void SetDifficulty(const std::string& str);
 	GameObject* FindGameObject(const std::string& name);
 };
 
