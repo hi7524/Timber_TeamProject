@@ -4,12 +4,11 @@
 #include "SceneTitle.h"
 #include "SceneDev1.h"
 #include "SceneDev2.h"
-#include "Single.h"
+//#include "Single.h"
 
 void SceneMgr::Init()
 {
-	scenes.push_back(new SceneTitle());
-	scenes.push_back(new Single());
+	//scenes.push_back(new Single());
 	scenes.push_back(new SceneTitle());
 	scenes.push_back(new SceneGame());
 	scenes.push_back(new SceneDev1());
