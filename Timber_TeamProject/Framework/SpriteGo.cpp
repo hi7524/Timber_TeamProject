@@ -38,7 +38,6 @@ void SpriteGo::SetOrigin(Origins preset)
 	{
 		origin = Utils::SetOrigin(sprite, originPreset);
 	}
-
 }
 
 void SpriteGo::Init()
@@ -57,7 +56,6 @@ void SpriteGo::Reset()
 
 void SpriteGo::Update(float dt)
 {
-
 }
 
 void SpriteGo::Draw(sf::RenderWindow& window)

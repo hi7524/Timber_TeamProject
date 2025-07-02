@@ -91,7 +91,7 @@ void Single::Update(float dt)
     if (InputMgr::GetKeyDown(sf::Keyboard::Return)) {
         if (selectedIndex >= 0 && selectedIndex < playerTextures.size()) {
             SCENE_MGR.selectedPlayer = playerTextures[selectedIndex];
-            SCENE_MGR.ChangeScene(SceneIds::SelectMod);
+            SCENE_MGR.ChangeScene(SceneIds::Game);
         }
     }
 }
