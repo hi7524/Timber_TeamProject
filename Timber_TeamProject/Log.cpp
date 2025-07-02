@@ -26,6 +26,7 @@ void Log::SetPosition(const sf::Vector2f& pos)
 void Log::Init()
 {
 	texIdLog = "graphics/log.png";
+	
 }
 
 void Log::Release()
