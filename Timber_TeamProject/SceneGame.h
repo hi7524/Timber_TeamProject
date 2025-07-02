@@ -4,6 +4,7 @@
 class Player;
 class Tree;
 class UiHud;
+class Log;
 
 class SceneGame : public Scene
 {
@@ -11,6 +12,7 @@ protected:
 	Player* player;
 	Tree* tree;
 	UiHud* uiHud;
+	Log* log;
 
 	bool isPlaying = false;
 	int score = 0;

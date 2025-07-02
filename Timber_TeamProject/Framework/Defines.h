@@ -13,10 +13,13 @@ enum class Origins
 enum class SceneIds
 {
 	None = -1,
-	Game,
+	Title,		//(캐릭터 선택,스테이지 선택 분기로),
+	Choice,
+	Game,		//(1인플레이 씬)
 	Dev1,
-	Dev2,
-	Count,
+	Dev2,		//(2인플레이 씬),
+	Ending,		//(엔딩 씬)
+	Count		//(count)
 };
 
 enum class Sides

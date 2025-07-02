@@ -36,13 +36,17 @@ Sides Tree::UpdateBranches()
 	return branchesSide[0];
 }
 
+
+
 void Tree::Init()
 {
 	texIdTree = "graphics/tree.png";
 	texIdBranch = "graphics/branch.png";
+	
 
 	branches.resize(6);
 	branchesSide.resize(6);
+
 }
 
 void Tree::Release()
@@ -75,13 +79,22 @@ void Tree::Reset()
 	}
 	branchesSide[branches.size() - 1] = Sides::None;
 
+	
 	sf::FloatRect windowBounds = FRAMEWORK.GetWindowBounds();
 	SetPosition({ windowBounds.width * 0.5f, 0.f });
+
+	for (int i = 0; i < logs.size(); i++)
+	{
+		sf::FloatRect bounds = tree.getLocalBounds();
+		logs[i].setTexture(TEXTURE_MGR.Get(texIdBranch));
+		logs[i].setOrigin(bounds.width * -0.5f, 0.f);
+	}
+
 }
 
 void Tree::Update(float dt)
 {
-
+	
 }
 
 void Tree::Draw(sf::RenderWindow& window)

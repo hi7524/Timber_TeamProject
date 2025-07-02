@@ -6,6 +6,7 @@
 #include "Tree.h"
 #include "Player.h"
 #include "UiHud.h"
+#include "Log.h"
 
 SceneGame::SceneGame()
 	: Scene(SceneIds::Game)
@@ -19,8 +20,10 @@ SceneGame::~SceneGame()
 void SceneGame::Init()
 {
     texIds.push_back("graphics/background.png");
+
     texIds.push_back("graphics/cloud.png");
     texIds.push_back("graphics/bee.png");
+    texIds.push_back("graphics/log.png");
     texIds.push_back("graphics/tree.png");
     texIds.push_back("graphics/branch.png");
     texIds.push_back("graphics/player.png");
@@ -29,20 +32,18 @@ void SceneGame::Init()
 
     fontIds.push_back("fonts/KOMIKAP_.ttf");
 
-    //
+    
 
     AddGameObject(new SpriteGo("graphics/background.png"));
     
     for (int i = 0; i < 3; ++i)
     {
-        BackgroundElement* element = (BackgroundElement*)AddGameObject(
-            new BackgroundElement("graphics/cloud.png"));
+        BackgroundElement* element = (BackgroundElement*)AddGameObject(new BackgroundElement("graphics/cloud.png"));
     }
 
     tree = (Tree*)AddGameObject(new Tree());
 
-    BackgroundElement* element = (BackgroundElement*)AddGameObject(
-        new BackgroundElement("graphics/bee.png"));
+    BackgroundElement* element = (BackgroundElement*)AddGameObject(new BackgroundElement("graphics/bee.png"));
     element->minScale = 1.f;
     element->maxScale = 1.f;
     element->minY = 600;
@@ -52,7 +53,7 @@ void SceneGame::Init()
     element->SetMoveType(BackgroundElement::MoveType::Wave);
 
     player = (Player*)AddGameObject(new Player());
-
+    log = (Log*)AddGameObject(new Log());
     uiHud = (UiHud*)AddGameObject(new UiHud());
 
     Scene::Init();
@@ -65,6 +66,7 @@ void SceneGame::Enter()
     sf::Vector2f pos = tree->GetPosition();
     pos.y = 950.f;
     player->SetPosition(pos);
+    log->SetPosition(pos);
 
     score = 0;
     uiHud->SetScore(score);
@@ -160,6 +162,9 @@ void SceneGame::Update(float dt)
             uiHud->SetTimeBar(timer / timerMax);
 
             uiHud->SetShowMassage(false);
+            
+            log->DisableLog();
+           
         }
     }
 
