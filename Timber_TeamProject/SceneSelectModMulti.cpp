@@ -13,10 +13,32 @@ SceneSelectModMulti::SceneSelectModMulti()
 void SceneSelectModMulti::Enter()
 {
 	Scene::Enter();
+
+	selectedNum1 = 0;
+	selectedNum2 = 0;
+	isReady1 = false;
+	isReady2 = false;
+
+	// 초기 텍스처 설정
+	character1->SetTextureId(textureId[0]);
+	character2->SetTextureId(textureId[0]);
+
+	character1->Reset();
+	character2->Reset();
+
+	// 텍스트 색상 초기화
+	textReady1->SetFillColor(sf::Color::Transparent);
+	textReady2->SetFillColor(sf::Color::Transparent);
+
+	textKeyL1->SetFillColor(sf::Color(64, 64, 64));
+	textKeyR1->SetFillColor(sf::Color::White);
+	textKeyL2->SetFillColor(sf::Color(64, 64, 64));
+	textKeyR2->SetFillColor(sf::Color::White);
 }
 
 void SceneSelectModMulti::Init()
 {
+	// 리소스 설정
 	texIds.push_back("graphics/player.png");
 	texIds.push_back("graphics/player1.png");
 	texIds.push_back("graphics/player2.png");
@@ -28,7 +50,7 @@ void SceneSelectModMulti::Init()
 	TextGo* player1Name = new TextGo("fonts/KOMIKAP_.ttf");
 	TextGo* player2Name = new TextGo("fonts/KOMIKAP_.ttf");
 	
-
+	// 텍스트 설정
 	title->SetString("Choose your character!");
 	title->SetFillColor(sf::Color::White);
 	title->SetCharacterSize(70);
@@ -44,7 +66,6 @@ void SceneSelectModMulti::Init()
 	player2Name->SetString("player 2");
 	player2Name->SetFillColor(sf::Color::White);
 	player2Name->SetCharacterSize(30);
-
 
 	textKeyL1->SetString("A");
 	textKeyL1->SetFillColor(sf::Color(64, 64, 64));
@@ -62,7 +83,6 @@ void SceneSelectModMulti::Init()
 	textKeyR2->SetFillColor(sf::Color::White);
 	textKeyR2->SetCharacterSize(25);
 
-
 	textReady1->SetString("READY");
 	textReady1->SetFillColor(sf::Color::Transparent);
 	textReady1->SetCharacterSize(50);
@@ -70,7 +90,6 @@ void SceneSelectModMulti::Init()
 	textReady2->SetString("READY");
 	textReady2->SetFillColor(sf::Color::Transparent);
 	textReady2->SetCharacterSize(50);
-
 
 	// Origin 설정
 	title->SetOrigin(Origins::MC);
@@ -82,6 +101,7 @@ void SceneSelectModMulti::Init()
 	textReady1->SetOrigin(Origins::MC);
 	textReady2->SetOrigin(Origins::MC);
 
+	// GameObject 추가
 	AddGameObject(title);
 	AddGameObject(detail);
 	AddGameObject(character1);
@@ -96,7 +116,7 @@ void SceneSelectModMulti::Init()
 	AddGameObject(textKeyL2);
 	AddGameObject(textKeyR2);
 
-
+	// 오브젝트들의 위치 설정
 	sf::Vector2f windowW = FRAMEWORK.GetWindowSizeF();
 
 	character1->SetPosition({ windowW.x * 0.5f - 325.0f, 600 });
