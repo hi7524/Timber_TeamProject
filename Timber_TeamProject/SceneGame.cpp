@@ -226,11 +226,6 @@ void SceneGame::Update(float dt)
     }
     else
     {
-        if (InputMgr::GetKeyDown(sf::Keyboard::Q))
-        {
-            SCENE_MGR.ChangeScene(SceneIds::Title);
-        }
-       
         if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && !isShowMenu)
         {
             FRAMEWORK.SetTimeScale(1.f);

@@ -53,7 +53,8 @@ void SceneMulti::Init()
 
 	uiHud2 = (UiHud2*)AddGameObject(new UiHud2());
 	uiMenu = (UiMenu*)AddGameObject(new UiMenu());
-
+	score1 = 0;
+	score2 = 0;
 	Scene::Init();
 
 }
@@ -94,7 +95,7 @@ void SceneMulti::Update(float dt)
 {
 	Scene::Update(dt);
 	// 메뉴
-	if (InputMgr::GetKeyDown(sf::Keyboard::Escape))
+	if (InputMgr::GetKeyDown(sf::Keyboard::Escape) && escape)
 	{
 		isShowMenu = !isShowMenu;
 		isPlaying = !isPlaying;
@@ -125,29 +126,27 @@ void SceneMulti::Update(float dt)
 		}
 	}
 	// 일시정지 및 재개
-	if (InputMgr::GetKeyDown(sf::Keyboard::Return) && !isShowMenu)
+	if (InputMgr::GetKeyDown(sf::Keyboard::Return)&& !isShowMenu && seungYeonCheck)
 	{
-		isPlaying = !isPlaying;
-
-		if (timer <= 0)
+		timer = timerMax;
+		if (seungYeonCheck)
 		{
-			timer = timerMax;
+			isPlaying = !isPlaying;
+			seungYeonCheck = false;
+			escape = true;
+			uiHud2->Reset();
 		}
-		else
+		if (isPlaying)
 		{
-			if (isPlaying)
-			{
-				uiHud2->SetShowTitle(false);
-				uiHud2->SetShowDetail(false);
-			}
-			/*else
-			{
-				uiHud2->SetTitleMessage("Pause");
-				uiHud2->SetDetailMessage("Press Enter Key to Restart");
-				uiHud2->SetShowTitle(true);
-				uiHud2->SetShowDetail(true);
-			}*/
+			uiHud2->SetShowTitle(false);
+			uiHud2->SetShowDetail(false);
 		}
+		
+		/*uiHud2->SetTitleMessage("Pause");
+		uiHud2->SetDetailMessage("Press Enter Key to Restart");*/
+		/*uiHud2->SetShowTitle(true);
+		uiHud2->SetShowDetail(true);*/
+		
 	}
 
 	if (isPlaying)
@@ -170,15 +169,21 @@ void SceneMulti::Update(float dt)
 			{
 				uiHud2->SetTitleMessage("Player 1 Winner!");
 				uiHud2->SetDetailMessage("\t\t1st Player 1: " + std::to_string(score1) + "\n\t\t2nd Player 2: " + std::to_string(score2) + "\nPress Enter Key to Restart");
+				escape = false;
+				seungYeonCheck = true;
 			}
 			else if (score1 < score2)
 			{
 				uiHud2->SetTitleMessage("Player 2 Winner!");
 				uiHud2->SetDetailMessage("\t\t1st Player 2: " + std::to_string(score2) + "\n\t\t2nd Player 1: " + std::to_string(score1) + "\nPress Enter Key to Restart");
+				escape = false;
+				seungYeonCheck = true;
 			}
 			else
 			{
 				uiHud2->SetTitleMessage("Draw!");
+				escape = false;
+				seungYeonCheck = true;
 			}
 
 			uiHud2->SetShowTitle(true);

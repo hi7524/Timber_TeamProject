@@ -17,9 +17,9 @@ protected:
 
 	bool isPlaying = true;
 	bool isShowMenu = false;
-
+	bool escape = true;
 	bool isMenu = true;
-
+	bool seungYeonCheck = false;
 	int score1 = 0;
 	int score2 = 0;
 
