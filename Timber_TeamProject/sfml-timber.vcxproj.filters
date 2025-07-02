@@ -90,6 +90,9 @@
     <ClCompile Include="SceneSeletMod.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="SceneDifficultyManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
     <ClCompile Include="SceneSelectModMulti.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -171,6 +174,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="SceneSeletMod.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneDifficultyManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="SceneSelectModMulti.h">

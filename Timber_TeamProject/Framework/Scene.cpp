@@ -74,6 +74,11 @@ void Scene::RemoveGameObject(GameObject* go)
 	gameObjects.remove(go);
 }
 
+void Scene::SetDifficulty(const std::string& str)
+{
+
+}
+
 GameObject* Scene::FindGameObject(const std::string& name)
 {
 	for (auto obj : gameObjects)

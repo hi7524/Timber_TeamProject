@@ -20,6 +20,7 @@ public:
 	void SetMessage(const std::string& msg);
 	void SetShowMassage(bool show) { isShowMessage = show; }
 	void SetTimeBar(float value); // 0.f ~ 1.f
+	void AddTimeBar(float value); // 0.f ~ 1.f
 
 	void Init() override;
 	void Release() override;

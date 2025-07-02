@@ -18,6 +18,7 @@ enum class SceneIds
 	Multi,
 	SelectMod,
 	Game,
+	Difficulty,
 	Dev1,
 	Dev2,
 	CharChoiceMulti,

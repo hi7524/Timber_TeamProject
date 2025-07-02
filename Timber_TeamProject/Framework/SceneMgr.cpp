@@ -7,6 +7,7 @@
 #include "Single.h"
 #include "SceneMulti.h"
 #include "SceneSeletMod.h"
+#include "SceneDifficultyManager.h"
 #include "SceneSelectModMulti.h"
 
 
@@ -17,6 +18,7 @@ void SceneMgr::Init()
 	scenes.push_back(new SceneMulti());
 	scenes.push_back(new SceneSeletMod());
 	scenes.push_back(new SceneGame());
+	scenes.push_back(new SceneDifficultyManager());
 	scenes.push_back(new SceneDev1());
 	scenes.push_back(new SceneDev2());
 	scenes.push_back(new SceneSelectModMulti());

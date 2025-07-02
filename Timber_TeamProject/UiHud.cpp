@@ -24,6 +24,11 @@ void UiHud::SetTimeBar(float value)
 	timeBar.setSize({ timeBarSize.x * value, timeBarSize.y });
 }
 
+void UiHud::AddTimeBar(float value)
+{
+	timeBarSize.x += value;
+}
+
 void UiHud::Init()
 {
 	fontId = "fonts/KOMIKAP_.ttf";

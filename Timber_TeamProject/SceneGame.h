@@ -17,12 +17,14 @@ protected:
 	bool isPlaying = false;
 	int score = 0;
 	float timer = 0.f;
-	float timerMax = 5.f;
+	static float timerMax;
 
 public:
 	SceneGame();
 	~SceneGame() override;
 
+	static void SetTimerMax(const float& time);
+	float GetTimer()const { return timerMax; };
 	void Init() override;
 
 	void Enter() override;

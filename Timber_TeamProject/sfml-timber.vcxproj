@@ -141,6 +141,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BackgroundElement.cpp" />
+    <ClCompile Include="SceneDifficultyManager.cpp" />
     <ClCompile Include="SceneSelectModMulti.cpp" />
     <ClCompile Include="Framework\Framework.cpp" />
     <ClCompile Include="Framework\GameObject.cpp" />
@@ -170,6 +171,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BackgroundElement.h" />
+    <ClInclude Include="SceneDifficultyManager.h" />
     <ClInclude Include="SceneSelectModMulti.h" />
     <ClInclude Include="Framework\Framework.h" />
     <ClInclude Include="Framework\Defines.h" />

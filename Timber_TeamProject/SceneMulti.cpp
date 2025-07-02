@@ -9,7 +9,7 @@
 
 
 SceneMulti::SceneMulti()
-	:Scene(SceneIds::Multi)
+	: Scene(SceneIds::Multi)
 {
 }
 
@@ -23,7 +23,6 @@ void SceneMulti::Init()
 	texIds.push_back("graphics/branch.png");
 	texIds.push_back("graphics/player.png");
 	texIds.push_back("graphics/axe.png");
-
 	fontIds.push_back("fonts/KOMIKAP_.ttf");
 
 	// 오브젝트 추가 (배경 요소)
