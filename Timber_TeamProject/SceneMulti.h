@@ -22,9 +22,6 @@ protected:
 	float timer = 0.0f;
 	float timerMax = 5.0f;
 
-	// 임시변수! 병합 후 수정할 것
-	std::string playMode = "Hard";
-
 public:
     SceneMulti();
 	~SceneMulti() override = default;

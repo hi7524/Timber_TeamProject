@@ -22,6 +22,8 @@ void SceneMulti::Init()
 	texIds.push_back("graphics/tree.png");
 	texIds.push_back("graphics/branch.png");
 	texIds.push_back("graphics/player.png");
+	texIds.push_back("graphics/player1.png");
+	texIds.push_back("graphics/player2.png");
 	texIds.push_back("graphics/axe.png");
 	fontIds.push_back("fonts/KOMIKAP_.ttf");
 
@@ -47,8 +49,8 @@ void SceneMulti::Init()
 	tree1 = (Tree*)AddGameObject(new Tree());
 	tree2 = (Tree*)AddGameObject(new Tree());
 
-	player1 = (Player*)AddGameObject(new Player(SCENE_MGR.selectedPlayer));
-	player2 = (Player*)AddGameObject(new Player(SCENE_MGR.selectedPlayer));
+	player1 = (Player*)AddGameObject(new Player(SCENE_MGR.selectedPlayer1));
+	player2 = (Player*)AddGameObject(new Player(SCENE_MGR.selectedPlayer2));
 
 	uiHud2 = (UiHud2*)AddGameObject(new UiHud2());
 
@@ -59,15 +61,10 @@ void SceneMulti::Enter()
 {
 	Scene::Enter();
 
-	// 플레이 모드에 따른 설정 (**임시 변수 → 수정할 것)
-	if (playMode == "Normal")
-	{
-		timerMax = 5.0f; // 5초
-	}
-	else if (playMode == "Hard")
-	{
-		timerMax = 3.0f; // 3초
-	}
+
+	timerMax = 5.0f; // 5초
+
+
 
 	// 나무 위치 설정
 	sf::Vector2f windowW = FRAMEWORK.GetWindowSizeF();

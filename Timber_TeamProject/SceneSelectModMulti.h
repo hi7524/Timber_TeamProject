@@ -10,7 +10,6 @@ protected:
 	int selectedNum1 = 0;
 	int selectedNum2 = 0;
 
-	int charImgSize = 3;
 	std::string textureId[3] = { "graphics/player.png", "graphics/player1.png", "graphics/player2.png" };
 
 	SpriteGo* character1 = new SpriteGo("graphics/player.png");

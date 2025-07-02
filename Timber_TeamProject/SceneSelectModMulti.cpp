@@ -189,14 +189,14 @@ void SceneSelectModMulti::Update(float dt)
 		}
 		if (InputMgr::GetKeyDown(sf::Keyboard::D))
 		{
-			if (selectedNum1 < charImgSize - 1)
+			if (selectedNum1 < 2)
 			{
 				selectedNum1++;
 			}
 		}
 
 		// 이동 가능 여부에 따라 색상 조작키 색상 변경
-		if (selectedNum1 == charImgSize - 1)
+		if (selectedNum1 == 2)
 		{
 			textKeyR1->SetFillColor(sf::Color(64, 64, 64));
 		}
@@ -213,7 +213,6 @@ void SceneSelectModMulti::Update(float dt)
 		{
 			textKeyL1->SetFillColor(sf::Color::White);
 		}
-
 		character1->SetTextureId(textureId[selectedNum1]);
 		character1->Reset();
 	}
@@ -235,14 +234,14 @@ void SceneSelectModMulti::Update(float dt)
 		}
 		if (InputMgr::GetKeyDown(sf::Keyboard::Right))
 		{
-			if (selectedNum2 < charImgSize - 1)
+			if (selectedNum2 < 2)
 			{
 				selectedNum2++;
 			}
 		}
 
 		// 이동 가능 여부에 따라 색상 조작키 색상 변경
-		if (selectedNum2 == charImgSize - 1)
+		if (selectedNum2 ==  2)
 		{
 			textKeyR2->SetFillColor(sf::Color(64, 64, 64));
 		}
