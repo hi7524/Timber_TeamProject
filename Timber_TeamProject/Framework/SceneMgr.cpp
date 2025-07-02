@@ -31,7 +31,6 @@ void SceneMgr::Init()
 			scene->Enter();
 		}
 	}
-
 	currentScene = startScene;
 	scenes[(int)currentScene]->Enter();
 }
@@ -65,7 +64,6 @@ void SceneMgr::Update(float dt)
 		scenes[(int)currentScene]->Init();
 		scenes[(int)currentScene]->Enter();
 	}
-
 	scenes[(int)currentScene]->Update(dt);
 }
 

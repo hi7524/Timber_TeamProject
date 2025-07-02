@@ -25,7 +25,7 @@ public:
 	~Player() override = default;
 	
 	void SetAlive(bool alive);
-	void SetDrawAxe(bool draw) { drawAxe = draw; }
+	void SetDrawAxe(bool draw) { drawAxe = draw;}
 
 	void SetSide(Sides s);
 	Sides GetSide() const { return side; }
