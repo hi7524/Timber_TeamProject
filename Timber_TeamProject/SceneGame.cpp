@@ -8,6 +8,8 @@
 #include "Player.h"
 #include "UiHud.h"
 #include "Log.h"
+#include "UiHud2.h"
+#include "UiMenu.h"
 
 float SceneGame::timerMax = 0.f;
 SceneGame::SceneGame() : Scene(SceneIds::Game)
@@ -69,6 +71,12 @@ void SceneGame::Init()
 
     log = (Log*)AddGameObject(new Log());
     uiHud = (UiHud*)AddGameObject(new UiHud());
+    uiMenu = (UiMenu*)AddGameObject(new UiMenu());
+
+    isShowMenu = false;
+    isPlaying = false;
+    isMenu = true;
+    escape = false;
 
     Scene::Init();
 }
@@ -105,6 +113,42 @@ void SceneGame::Update(float dt)
 {
     Scene::Update(dt);
 
+    // ¸Þ´º
+    if (escape)
+    {
+        if (InputMgr::GetKeyDown(sf::Keyboard::Escape))
+        {
+            isShowMenu = !isShowMenu;
+            isPlaying = !isPlaying;
+            isMenu = !isMenu;
+            log->SetLogAc(isPlaying);
+            uiMenu->SetIsShowMenu(isShowMenu);
+        }
+    }
+   
+    if (isShowMenu)
+    {
+        if (InputMgr::GetKeyDown(sf::Keyboard::Up))
+        {
+            uiMenu->ColorSelectedOption("Title");
+        }
+        if (InputMgr::GetKeyDown(sf::Keyboard::Down))
+        {
+            uiMenu->ColorSelectedOption("Exit");
+        }
+        if (InputMgr::GetKeyDown(sf::Keyboard::Return))
+        {
+            if (uiMenu->GetIsTitle())
+            {
+                SCENE_MGR.ChangeScene(SceneIds::Title);
+            }
+            else if (uiMenu->GetIsExit())
+            {
+                FRAMEWORK.WindowClose();
+            }
+        }
+    }
+
     if (isPlaying)
     {
         if (InputMgr::GetKeyDown(sf::Keyboard::Left))
@@ -114,13 +158,14 @@ void SceneGame::Update(float dt)
             player->SetSide(Sides::Left);
             if (tree->GetSide() == player->GetSide())
             {
+                escape = false;
                 deathSound->Play();
                 isPlaying = false;
                 FRAMEWORK.SetTimeScale(0.f);
                 player->SetAlive(false);
-
+                
                 uiHud->SetShowMassage(true);
-                uiHud->SetMessage("\t  Enter to Restart! \n Press Q to return to Title");
+                uiHud->SetMessage("Enter to Restart!");
             }
             else
             {
@@ -141,13 +186,14 @@ void SceneGame::Update(float dt)
             player->SetSide(Sides::Right);
             if (tree->GetSide() == player->GetSide())
             {
+                escape = false;
                 deathSound->Play();
                 isPlaying = false;
                 FRAMEWORK.SetTimeScale(0.f);
                 player->SetAlive(false);
-
+                
                 uiHud->SetShowMassage(true);
-                uiHud->SetMessage("\t  Enter to Restart! \n Press Q to return to Title");
+                uiHud->SetMessage("Enter to Restart!");
             }
             else
             {
@@ -167,30 +213,31 @@ void SceneGame::Update(float dt)
         if (timer <= 0.f)
         {   
             timer = 0.f;
+            escape = false;
             isPlaying = false;
             FRAMEWORK.SetTimeScale(0.f);
             player->SetAlive(false);
             timeSound->Play();
+            player->SetDrawAxe(false);
             uiHud->SetShowMassage(true);
-            uiHud->SetMessage("\t  Enter to Restart! \n Press Q to return to Title");
+            uiHud->SetMessage("Enter to Restart!");
         }
         uiHud->SetTimeBar(timer / timerMax);
-        
-        
     }
     else
     {
-       /* if (InputMgr::GetKeyDown(sf::Keyboard::Q))
+        if (InputMgr::GetKeyDown(sf::Keyboard::Q))
         {
             SCENE_MGR.ChangeScene(SceneIds::Title);
-        }*/
-        if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
+        }
+       
+        if (InputMgr::GetKeyDown(sf::Keyboard::Enter) && !isShowMenu)
         {
             FRAMEWORK.SetTimeScale(1.f);
             player->Reset();
             tree->Reset();
             isPlaying = true;
-
+            escape = true;
             score = 0;
             uiHud->SetScore(score);
 
@@ -201,5 +248,7 @@ void SceneGame::Update(float dt)
             log->SetLogAc(true);
             log->DisableLog();
         }
+        
+
     }
 }

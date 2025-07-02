@@ -168,6 +168,7 @@
     <ClCompile Include="Tree.cpp" />
     <ClCompile Include="UiHud.cpp" />
     <ClCompile Include="UiHud2.cpp" />
+    <ClCompile Include="UiMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BackgroundElement.h" />
@@ -197,6 +198,7 @@
     <ClInclude Include="Tree.h" />
     <ClInclude Include="UiHud.h" />
     <ClInclude Include="UiHud2.h" />
+    <ClInclude Include="UiMenu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

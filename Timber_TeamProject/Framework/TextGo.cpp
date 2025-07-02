@@ -65,6 +65,7 @@ void TextGo::SetOrigin(Origins preset)
 
 void TextGo::Init()
 {
+	
 }
 
 void TextGo::Release()

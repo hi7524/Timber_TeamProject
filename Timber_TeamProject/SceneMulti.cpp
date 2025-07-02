@@ -6,10 +6,9 @@
 #include "Tree.h"
 #include "Player.h"
 #include "UiHud2.h"
+#include "UiMenu.h"
 
-
-SceneMulti::SceneMulti()
-	: Scene(SceneIds::Multi)
+SceneMulti::SceneMulti() : Scene(SceneIds::Multi)
 {
 }
 
@@ -27,13 +26,13 @@ void SceneMulti::Init()
 	texIds.push_back("graphics/axe.png");
 	fontIds.push_back("fonts/KOMIKAP_.ttf");
 
+
 	// 오브젝트 추가 (배경 요소)
 	AddGameObject(new SpriteGo("graphics/background.png"));
 
 	for (int i = 0; i < 3; ++i)
 	{
-		BackgroundElement* element = (BackgroundElement*)AddGameObject(
-			new BackgroundElement("graphics/cloud.png"));
+		BackgroundElement* element = (BackgroundElement*)AddGameObject(new BackgroundElement("graphics/cloud.png"));
 	}
 
 	BackgroundElement* element = (BackgroundElement*)AddGameObject(new BackgroundElement("graphics/bee.png"));
@@ -53,18 +52,20 @@ void SceneMulti::Init()
 	player2 = (Player*)AddGameObject(new Player(SCENE_MGR.selectedPlayer2));
 
 	uiHud2 = (UiHud2*)AddGameObject(new UiHud2());
+	uiMenu = (UiMenu*)AddGameObject(new UiMenu());
 
 	Scene::Init();
+
 }
 
 void SceneMulti::Enter()
 {
+
 	Scene::Enter();
-
-
+	isShowMenu = false;
+	isPlaying = true;
+	isMenu = true;
 	timerMax = 5.0f; // 5초
-
-
 
 	// 나무 위치 설정
 	sf::Vector2f windowW = FRAMEWORK.GetWindowSizeF();
@@ -92,9 +93,39 @@ void SceneMulti::Enter()
 void SceneMulti::Update(float dt)
 {
 	Scene::Update(dt);
+	// 메뉴
+	if (InputMgr::GetKeyDown(sf::Keyboard::Escape))
+	{
+		isShowMenu = !isShowMenu;
+		isPlaying = !isPlaying;
+		isMenu = !isMenu;
+		uiMenu->SetIsShowMenu(isShowMenu);
+	}
 
+	if (isShowMenu)
+	{
+		if (InputMgr::GetKeyDown(sf::Keyboard::Up))
+		{
+			uiMenu->ColorSelectedOption("Title");
+		}
+		if (InputMgr::GetKeyDown(sf::Keyboard::Down))
+		{
+			uiMenu->ColorSelectedOption("Exit");
+		}
+		if (InputMgr::GetKeyDown(sf::Keyboard::Return))
+		{
+			if (uiMenu->GetIsTitle())
+			{
+				SCENE_MGR.ChangeScene(SceneIds::Title);
+			}
+			else if (uiMenu->GetIsExit())
+			{
+				FRAMEWORK.WindowClose();
+			}
+		}
+	}
 	// 일시정지 및 재개
-	if (InputMgr::GetKeyDown(sf::Keyboard::Return))
+	if (InputMgr::GetKeyDown(sf::Keyboard::Return) && !isShowMenu)
 	{
 		isPlaying = !isPlaying;
 
@@ -109,13 +140,13 @@ void SceneMulti::Update(float dt)
 				uiHud2->SetShowTitle(false);
 				uiHud2->SetShowDetail(false);
 			}
-			else
+			/*else
 			{
 				uiHud2->SetTitleMessage("Pause");
 				uiHud2->SetDetailMessage("Press Enter Key to Restart");
 				uiHud2->SetShowTitle(true);
 				uiHud2->SetShowDetail(true);
-			}
+			}*/
 		}
 	}
 
@@ -138,12 +169,12 @@ void SceneMulti::Update(float dt)
 			if (score1 > score2)
 			{
 				uiHud2->SetTitleMessage("Player 1 Winner!");
-				uiHud2->SetDetailMessage("1st Player 1: " + std::to_string(score1) + "\n2nd Player 2: " + std::to_string(score2));
+				uiHud2->SetDetailMessage("\t\t1st Player 1: " + std::to_string(score1) + "\n\t\t2nd Player 2: " + std::to_string(score2) + "\nPress Enter Key to Restart");
 			}
 			else if (score1 < score2)
 			{
 				uiHud2->SetTitleMessage("Player 2 Winner!");
-				uiHud2->SetDetailMessage("1st Player 2: " + std::to_string(score2) + "\n2nd Player 1: " + std::to_string(score1));
+				uiHud2->SetDetailMessage("\t\t1st Player 2: " + std::to_string(score2) + "\n\t\t2nd Player 1: " + std::to_string(score1) + "\nPress Enter Key to Restart");
 			}
 			else
 			{

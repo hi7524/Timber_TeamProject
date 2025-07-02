@@ -12,44 +12,41 @@ SceneSelectModMulti::SceneSelectModMulti()
 
 void SceneSelectModMulti::Enter()
 {
-	Scene::Enter();
+	
+	title = (TextGo*)AddGameObject(new TextGo("fonts/KOMIKAP_.ttf"));
+	detail = (TextGo*)AddGameObject(new TextGo("fonts/KOMIKAP_.ttf"));
+	player1Name = (TextGo*)AddGameObject(new TextGo("fonts/KOMIKAP_.ttf"));
+	player2Name = (TextGo*)AddGameObject(new TextGo("fonts/KOMIKAP_.ttf"));
+
+	// GameObject 추가
+	AddGameObject(character1);
+	AddGameObject(character2);
+	AddGameObject(textReady1);
+	AddGameObject(textReady2);
+	AddGameObject(textKeyL1);
+	AddGameObject(textKeyR1);
+	AddGameObject(textKeyL2);
+	AddGameObject(textKeyR2);
 
 	selectedNum1 = 0;
 	selectedNum2 = 0;
 	isReady1 = false;
 	isReady2 = false;
-
+	
 	// 초기 텍스처 설정
 	character1->SetTextureId(textureId[0]);
 	character2->SetTextureId(textureId[0]);
-
-	character1->Reset();
-	character2->Reset();
 
 	// 텍스트 색상 초기화
 	textReady1->SetFillColor(sf::Color::Transparent);
 	textReady2->SetFillColor(sf::Color::Transparent);
 
+	Scene::Enter();
+
 	textKeyL1->SetFillColor(sf::Color(64, 64, 64));
 	textKeyR1->SetFillColor(sf::Color::White);
 	textKeyL2->SetFillColor(sf::Color(64, 64, 64));
 	textKeyR2->SetFillColor(sf::Color::White);
-}
-
-void SceneSelectModMulti::Init()
-{
-	// 리소스 설정
-	texIds.push_back("graphics/player.png");
-	texIds.push_back("graphics/player1.png");
-	texIds.push_back("graphics/player2.png");
-
-	fontIds.push_back("fonts/KOMIKAP_.ttf");
-
-	TextGo* title = new TextGo("fonts/KOMIKAP_.ttf");
-	TextGo* detail = new TextGo("fonts/KOMIKAP_.ttf");
-	TextGo* player1Name = new TextGo("fonts/KOMIKAP_.ttf");
-	TextGo* player2Name = new TextGo("fonts/KOMIKAP_.ttf");
-	
 	// 텍스트 설정
 	title->SetString("Choose your character!");
 	title->SetFillColor(sf::Color::White);
@@ -90,7 +87,7 @@ void SceneSelectModMulti::Init()
 	textReady2->SetString("READY");
 	textReady2->SetFillColor(sf::Color::Transparent);
 	textReady2->SetCharacterSize(50);
-
+	
 	// Origin 설정
 	title->SetOrigin(Origins::MC);
 	detail->SetOrigin(Origins::MC);
@@ -101,20 +98,7 @@ void SceneSelectModMulti::Init()
 	textReady1->SetOrigin(Origins::MC);
 	textReady2->SetOrigin(Origins::MC);
 
-	// GameObject 추가
-	AddGameObject(title);
-	AddGameObject(detail);
-	AddGameObject(character1);
-	AddGameObject(character2);
-	AddGameObject(player1Name);
-	AddGameObject(player2Name);
-	AddGameObject(textReady1);
-	AddGameObject(textReady2);
-
-	AddGameObject(textKeyL1);
-	AddGameObject(textKeyR1);
-	AddGameObject(textKeyL2);
-	AddGameObject(textKeyR2);
+	
 
 	// 오브젝트들의 위치 설정
 	sf::Vector2f windowW = FRAMEWORK.GetWindowSizeF();
@@ -135,10 +119,21 @@ void SceneSelectModMulti::Init()
 	textReady2->SetPosition({ playerPos2.x, playerPos2.y + 200 });
 
 	textKeyL1->SetPosition({ playerPos1.x - 140.0f, playerPos1.y });
-	textKeyR1->SetPosition({ playerPos1.x + 140.0f, playerPos1.y});
+	textKeyR1->SetPosition({ playerPos1.x + 140.0f, playerPos1.y });
 	textKeyL2->SetPosition({ playerPos2.x - 140.0f, playerPos2.y });
 	textKeyR2->SetPosition({ playerPos2.x + 140.0f, playerPos2.y });
 	
+}
+
+void SceneSelectModMulti::Init()
+{
+	// 리소스 설정
+	texIds.push_back("graphics/player.png");
+	texIds.push_back("graphics/player1.png");
+	texIds.push_back("graphics/player2.png");
+
+	fontIds.push_back("fonts/KOMIKAP_.ttf");
+
 	Scene::Init();
 }
 

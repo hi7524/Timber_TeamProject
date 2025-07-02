@@ -34,6 +34,8 @@ public:
 		return sf::FloatRect(0.f, 0.f, size.x, size.y);
 	}
 
+	void WindowClose();
+
 	float GetTimeScale() const { return timeScale; }
 	void SetTimeScale(float scale) { timeScale = scale; }
 

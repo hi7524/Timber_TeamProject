@@ -3,22 +3,24 @@
 #include "TextGo.h"
 #include "SpriteGo.h"
 
-
-SceneTitle::SceneTitle()
-	: Scene(SceneIds::Title)
+SceneTitle::SceneTitle() : Scene(SceneIds::Title)
 {
 }
 
-void SceneTitle::Init()
+void SceneTitle::Enter()
 {
+	
+	AddGameObject(new SpriteGo("graphics/Title.png"));
+	title = (TextGo*)(AddGameObject(new TextGo("fonts/KOMIKAP_.ttf")));
+	teamName = (TextGo*)(AddGameObject(new TextGo("fonts/KOMIKAP_.ttf")));
+	singlePlay = (TextGo*)(AddGameObject(new TextGo("fonts/KOMIKAP_.ttf")));
+	multiPlay = (TextGo*)(AddGameObject(new TextGo("fonts/KOMIKAP_.ttf")));
+	
 	sf::FloatRect bounds = FRAMEWORK.GetWindowBounds();
 	sf::Vector2f titlePos = { bounds.width * 0.5f,bounds.height * 0.3f };
 	sf::Vector2f teamNamePos = { bounds.width * 0.5f,bounds.height * 0.5f };
 	sf::Vector2f singlePlayPos = { bounds.width * 0.2f,bounds.height * 0.8f };
 	sf::Vector2f multiPlayPos = { bounds.width * 0.8f,bounds.height * 0.8f };
-
-	fontIds.push_back("fonts/KOMIKAP_.ttf");
-	texIds.push_back("graphics/Title.png");
 
 	title->SetString("TIM BER");
 	title->SetCharacterSize(200);
@@ -32,13 +34,11 @@ void SceneTitle::Init()
 	teamName->SetOrigin(Origins::MC);
 	teamName->SetPosition(teamNamePos);
 
-
 	singlePlay->SetString("SinglePlay");
 	singlePlay->SetCharacterSize(100);
 	singlePlay->SetFillColor(sf::Color::Black);
 	singlePlay->SetOrigin(Origins::MC);
 	singlePlay->SetPosition(singlePlayPos);
-
 
 	multiPlay->SetString("MultiPlay");
 	multiPlay->SetCharacterSize(100);
@@ -46,12 +46,13 @@ void SceneTitle::Init()
 	multiPlay->SetOrigin(Origins::MC);
 	multiPlay->SetPosition(multiPlayPos);
 
+	Scene::Enter();
+}
 
-	AddGameObject(new SpriteGo("graphics/Title.png"));
-	AddGameObject(title);
-	AddGameObject(teamName);
-	AddGameObject(singlePlay);
-	AddGameObject(multiPlay);
+void SceneTitle::Init()
+{
+	fontIds.push_back("fonts/KOMIKAP_.ttf");
+	texIds.push_back("graphics/Title.png");
 
 	Scene::Init();
 }
@@ -76,8 +77,6 @@ void SceneTitle::Update(float dt)
 		}
 		else if (multiPlay->GetFillColor() == sf::Color::Red)
 		{
-			
-		
 			SCENE_MGR.ChangeScene(SceneIds::CharChoiceMulti);
 		}
 	}

@@ -24,6 +24,11 @@ protected:
 	TextGo* textReady1 = new TextGo("fonts/KOMIKAP_.ttf");
 	TextGo* textReady2 = new TextGo("fonts/KOMIKAP_.ttf");
 
+	TextGo* title;
+	TextGo* detail;
+	TextGo* player1Name;
+	TextGo* player2Name;
+
 	bool isReady1 = false;
 	bool isReady2 = false;
 

@@ -7,13 +7,13 @@
 class SceneDifficultyManager : public Scene
 {
 protected:
-	TextGo* normal = new TextGo("fonts/KOMIKAP_.ttf");
-	TextGo* hard = new TextGo("fonts/KOMIKAP_.ttf");
-	
-	
+	TextGo* normal;
+	TextGo* hard;
+
 public:
 	SceneDifficultyManager();
 	~SceneDifficultyManager() override = default;
+	void Enter() override;
 	void Init() override;
 	void Update(float dt) override;
 	void Single();

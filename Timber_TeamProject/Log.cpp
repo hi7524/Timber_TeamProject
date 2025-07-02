@@ -28,6 +28,8 @@ void Log::Init()
 	texIdLog = "graphics/log.png";
 }
 
+
+
 void Log::Release()
 {
 }

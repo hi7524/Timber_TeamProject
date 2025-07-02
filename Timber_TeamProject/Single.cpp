@@ -11,7 +11,6 @@ void Single::ChangeScene()
 {
 }
 
-
 void Single::Init()
 {
     sf::FloatRect bounds = FRAMEWORK.GetWindowBounds();

@@ -2,8 +2,7 @@
 #include "UiHud2.h"
 
 
-UiHud2::UiHud2(const std::string& name)
-	:GameObject(name)
+UiHud2::UiHud2(const std::string& name) : GameObject(name)
 {
 }
 
@@ -53,32 +52,7 @@ void UiHud2::Init()
 {
 	fontId = "fonts/KOMIKAP_.ttf";
 
-	sf::FloatRect bounds = FRAMEWORK.GetWindowBounds();
-
-	// 텍스트 UI 설정
-	Utils::SetOrigin(textScore1, Origins::TL);
-	Utils::SetOrigin(textScore2, Origins::TR);
-
-	textScore1.setCharacterSize(50);
-	textScore2.setCharacterSize(50);
-
-	textScore1.setFillColor(sf::Color::White);
-	textScore2.setFillColor(sf::Color::White);
-
-	textScore1.setPosition(20, 20);
-	textScore2.setPosition(1920 - 20 ,20);
-
-	textTitle.setCharacterSize(80);
-	textDetail.setCharacterSize(50);
-
-	// 타임바 UI 설정
-	timeBarSize = { 400.f, 40.f };
-	timeBar.setFillColor(sf::Color::Red);
-	timeBar.setSize(timeBarSize);
-
-	Utils::SetOrigin(timeBar, Origins::BL);
-
-	timeBar.setPosition(bounds.width * 0.5f - timeBarSize.x * 0.5f, 100.f);
+	
 }
 
 void UiHud2::Release()
@@ -100,6 +74,35 @@ void UiHud2::Reset()
 
 	textScore1.setPosition(20, 20);
 	textScore2.setPosition(1920 - 20, 20);
+
+	sf::FloatRect bounds = FRAMEWORK.GetWindowBounds();
+
+	// 텍스트 UI 설정
+
+
+	textScore1.setCharacterSize(50);
+	textScore2.setCharacterSize(50);
+
+	textScore1.setFillColor(sf::Color::White);
+	textScore2.setFillColor(sf::Color::White);
+
+	textScore1.setPosition(20, 20);
+	textScore2.setPosition(1920 - 20, 20);
+
+	textTitle.setCharacterSize(80);
+	textDetail.setCharacterSize(50);
+
+	// 타임바 UI 설정
+	timeBarSize = { 400.f, 40.f };
+	timeBar.setFillColor(sf::Color::Red);
+	timeBar.setSize(timeBarSize);
+
+	Utils::SetOrigin(timeBar, Origins::BL);
+
+	timeBar.setPosition(bounds.width * 0.5f - timeBarSize.x * 0.5f, 100.f);
+
+	Utils::SetOrigin(textScore1, Origins::TL);
+	Utils::SetOrigin(textScore2, Origins::TR);
 }
 
 void UiHud2::Update(float dt)
