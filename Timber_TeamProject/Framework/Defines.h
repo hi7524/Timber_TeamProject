@@ -14,9 +14,6 @@ enum class SceneIds
 {
 	None = -1,
 	Title,
-	Single,
-	Multi,
-	SelectMod,
 	Game,
 	Dev1,
 	Dev2,
