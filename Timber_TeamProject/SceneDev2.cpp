@@ -23,7 +23,6 @@ void SceneDev2::Init()
 	texIds.push_back("graphics/branch.png");
 	texIds.push_back("graphics/player.png");
 	texIds.push_back("graphics/axe.png");
-	texIds.push_back("graphics/rip.png");
 
 	fontIds.push_back("fonts/KOMIKAP_.ttf");
 
@@ -170,6 +169,7 @@ void SceneDev2::Update(float dt)
 		{
 			tree1->UpdateBranches();
 			player1->SetSide(Sides::Left);
+			player1->SetDrawAxe(true);
 
 			// 충돌 체크
 			if (tree1->GetSide() == player1->GetSide())
@@ -193,6 +193,7 @@ void SceneDev2::Update(float dt)
 		{
 			tree1->UpdateBranches();
 			player1->SetSide(Sides::Right);
+			player1->SetDrawAxe(true);
 
 			// 충돌 체크
 			if (tree1->GetSide() == player1->GetSide())
@@ -212,12 +213,17 @@ void SceneDev2::Update(float dt)
 			uiHud2->SetScore(score1, 1);
 		}
 
+		if (InputMgr::GetKeyUp(sf::Keyboard::A) || InputMgr::GetKeyUp(sf::Keyboard::D))
+		{
+			player1->SetDrawAxe(false);
+		}
 
 		// 플레이어 2 조작
 		if (InputMgr::GetKeyDown(sf::Keyboard::Left))
 		{
 			tree2->UpdateBranches();
 			player2->SetSide(Sides::Left);
+			player2->SetDrawAxe(true);
 
 			// 충돌 체크
 			if (tree2->GetSide() == player2->GetSide())
@@ -241,6 +247,7 @@ void SceneDev2::Update(float dt)
 		{
 			tree2->UpdateBranches();
 			player2->SetSide(Sides::Right);
+			player2->SetDrawAxe(true);
 
 			// 충돌 체크
 			if (tree2->GetSide() == player2->GetSide())
@@ -258,6 +265,11 @@ void SceneDev2::Update(float dt)
 
 			// Score UI 업데이트
 			uiHud2->SetScore(score2, 2);
+		}
+
+		if (InputMgr::GetKeyUp(sf::Keyboard::Left) || InputMgr::GetKeyUp(sf::Keyboard::Right))
+		{
+			player2->SetDrawAxe(false);
 		}
 	}
 	else
