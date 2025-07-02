@@ -18,7 +18,7 @@ void SceneTitle::Init()
 	sf::Vector2f multiPlayPos = { bounds.width * 0.8f,bounds.height * 0.8f };
 	
 	fontIds.push_back("fonts/KOMIKAP_.ttf");
-	texIds.push_back("graphics/woodcutter.png");
+	texIds.push_back("graphics/Title.png");
 	
 	
 	title->SetString("TIM BER");
@@ -33,13 +33,11 @@ void SceneTitle::Init()
 	teamName->SetOrigin(Origins::MC);
 	teamName->SetPosition(teamNamePos);
 
-
 	singlePlay->SetString("SinglePlay");
 	singlePlay->SetCharacterSize(100);
 	singlePlay->SetFillColor(sf::Color::Black);
 	singlePlay->SetOrigin(Origins::MC);
 	singlePlay->SetPosition(singlePlayPos);
-
 
 	multiPlay->SetString("MultiPlay");
 	multiPlay->SetCharacterSize(100);
@@ -48,7 +46,7 @@ void SceneTitle::Init()
 	multiPlay->SetPosition(multiPlayPos);
 
 
-	AddGameObject(new SpriteGo("graphics/woodcutter.png"));
+	AddGameObject(new SpriteGo("graphics/Title.png"));
 	AddGameObject(title);
 	AddGameObject(teamName);
 	AddGameObject(singlePlay);
