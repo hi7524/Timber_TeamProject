@@ -274,6 +274,6 @@ void SceneSelectModMulti::Update(float dt)
 		SCENE_MGR.selectedPlayer1 = textureId[selectedNum1];
 		SCENE_MGR.selectedPlayer2 = textureId[selectedNum2];
 
-		SCENE_MGR.ChangeScene(SceneIds::Dev2);
+		SCENE_MGR.ChangeScene(SceneIds::Multi);
 	}
 }

@@ -7,7 +7,23 @@ class UiHud2;
 
 class SceneDev2 : public Scene
 {
+protected:
+	Player* player1;
+	Player* player2;
+	Tree* tree1;
+	Tree* tree2;
+	UiHud2* uiHud2;
 
+	bool isPlaying = true;
+
+	int score1 = 0;
+	int score2 = 0;
+
+	float timer = 0.0f;
+	float timerMax = 5.0f;
+
+	// ??????! ???? ?? ?????? ??
+	std::string playMode = "Hard";
 
 public:
 	SceneDev2();
