@@ -20,6 +20,9 @@ void UiHud2::SetScore(int score, int playerNum)
 	{
 		static std::string formatScore = "SCORE: ";
 		textScore2.setString(formatScore + std::to_string(score));
+
+		Utils::SetOrigin(textScore2, Origins::TR);
+		textScore2.setPosition(1920 - 20, 20);
 	}
 }
 
@@ -30,6 +33,7 @@ void UiHud2::SetTitleMessage(const std::string& msg)
 	sf::FloatRect bounds = FRAMEWORK.GetWindowBounds();
 	Utils::SetOrigin(textTitle, Origins::MC);
 	textTitle.setPosition(bounds.width * 0.5f, bounds.height * 0.5f - 100);
+	textTitle.setFillColor(sf::Color::Yellow);
 }
 
 void UiHud2::SetDetailMessage(const std::string& msg)
@@ -53,17 +57,11 @@ void UiHud2::Init()
 	sf::FloatRect bounds = FRAMEWORK.GetWindowBounds();
 
 	// 텍스트 UI 설정
-	Utils::SetOrigin(textScore1, Origins::TL);
-	Utils::SetOrigin(textScore2, Origins::TR);
-
 	textScore1.setCharacterSize(50);
 	textScore2.setCharacterSize(50);
 
 	textScore1.setFillColor(sf::Color::White);
 	textScore2.setFillColor(sf::Color::White);
-
-	textScore1.setPosition(20, 20);
-	textScore2.setPosition(1920 - 350 ,20); // Utils 수정 후 수정할 것 **
 
 	textTitle.setCharacterSize(80);
 	textDetail.setCharacterSize(50);
