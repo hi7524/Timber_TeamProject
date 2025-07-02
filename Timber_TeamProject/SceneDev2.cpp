@@ -49,8 +49,8 @@ void SceneDev2::Init()
 	tree1 = (Tree*)AddGameObject(new Tree());
 	tree2= (Tree*)AddGameObject(new Tree());
 
-	player1 = (Player*)AddGameObject(new Player());
-	player2 = (Player*)AddGameObject(new Player());
+	player1 = (Player*)AddGameObject(new Player(SCENE_MGR.selectedPlayer));
+	player2 = (Player*)AddGameObject(new Player(SCENE_MGR.selectedPlayer));
 
 	uiHud2 = (UiHud2*)AddGameObject(new UiHud2());
 
