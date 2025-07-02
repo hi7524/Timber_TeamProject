@@ -16,6 +16,7 @@ protected:
 	int logIdxCount = 0;
 	float logSpeed = 2000.f;
 	bool isLogActive[MAX_LOGS];
+	bool logActive = false;
 
 public:
 	Log(const std::string& name = "");
@@ -25,7 +26,7 @@ public:
 	void SetPosition(const sf::Vector2f& pos) override;
 
 	void Init() override;
-
+	void SetLogAc(const bool& bo) { logActive = bo; };
 	void Release() override;
 
 	void Reset() override;

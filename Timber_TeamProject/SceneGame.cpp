@@ -8,8 +8,7 @@
 #include "UiHud.h"
 #include "Log.h"
 
-SceneGame::SceneGame()
-	: Scene(SceneIds::Game)
+SceneGame::SceneGame() : Scene(SceneIds::Game)
 {
 }
 
@@ -143,6 +142,7 @@ void SceneGame::Update(float dt)
 
             uiHud->SetShowMassage(true);
             uiHud->SetMessage("Enter to Restart!");
+            
         }
         uiHud->SetTimeBar(timer / timerMax);
     }
@@ -162,7 +162,7 @@ void SceneGame::Update(float dt)
             uiHud->SetTimeBar(timer / timerMax);
 
             uiHud->SetShowMassage(false);
-            
+            log->SetLogAc(true);
             log->DisableLog();
            
         }

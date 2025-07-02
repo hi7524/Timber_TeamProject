@@ -8,7 +8,6 @@
 
 void SceneMgr::Init()
 {
-	
 	//scenes.push_back(new Single());
 	scenes.push_back(new SceneTitle());
 	scenes.push_back(new SceneGame());
