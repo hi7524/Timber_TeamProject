@@ -208,7 +208,6 @@ void SceneMulti::Update(float dt)
 			{
 				score1 += 10;
 			}
-
 			// Score UI 업데이트
 			uiHud2->SetScore(score1, 1);
 		}
