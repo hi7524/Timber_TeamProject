@@ -154,6 +154,8 @@
     <ClCompile Include="SceneDev2.cpp" />
     <ClCompile Include="SceneGame.cpp" />
     <ClCompile Include="Framework\SceneMgr.cpp" />
+    <ClCompile Include="SceneMulti.cpp" />
+    <ClCompile Include="SceneSeletMod.cpp" />
     <ClCompile Include="SceneTitle.cpp" />
     <ClCompile Include="Single.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -181,6 +183,8 @@
     <ClInclude Include="SceneDev2.h" />
     <ClInclude Include="SceneGame.h" />
     <ClInclude Include="Framework\SceneMgr.h" />
+    <ClInclude Include="SceneMulti.h" />
+    <ClInclude Include="SceneSeletMod.h" />
     <ClInclude Include="SceneTitle.h" />
     <ClInclude Include="Single.h" />
     <ClInclude Include="stdafx.h" />
