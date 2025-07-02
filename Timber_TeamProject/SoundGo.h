@@ -5,6 +5,7 @@ class SoundGo : public GameObject
 {
 protected:
 	sf::Sound sound;
+	sf::Music music;
 	std::string soundId;
 public:
 	SoundGo(const std::string& sId = "", const std::string& name = "");
@@ -22,7 +23,8 @@ public:
 	void Reset() override;
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
-	void Play();
+	void Play(); //sf::sound
+	void Music(); //sf::music
 };
 
 

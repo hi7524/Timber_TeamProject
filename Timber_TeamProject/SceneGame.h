@@ -31,7 +31,6 @@ protected:
 	bool isPlaying = false;
 	bool isMenu = true;
 	bool escape = false;
-	
 
 	int score = 0;
 	float timer = 0.f;

@@ -8,15 +8,31 @@ SoundGo::SoundGo(const std::string& sId, const std::string& name)
 
 void SoundGo::Init()
 {
+    if (!soundId.empty())
+    {
+        if (!music.openFromFile(soundId))
+        {
+        }
+        else
+        {
+            music.setLoop(true); // 반복 재생 설정
+        }
+        sound.setBuffer(SOUNDBUFFER_MGR.Get(soundId));
+    }
+    else
+    {
+    }
 }
 
 void SoundGo::Release()
 {
+    music.stop();
 }
 
 void SoundGo::Reset()
 {
-	sound.setBuffer(SOUNDBUFFER_MGR.Get(soundId));
+    music.stop();
+    sound.setBuffer(SOUNDBUFFER_MGR.Get(soundId));
 }
 
 void SoundGo::Update(float dt)
@@ -29,5 +45,10 @@ void SoundGo::Draw(sf::RenderWindow& window)
 
 void SoundGo::Play()
 {
-	sound.play();
+    sound.play();
+}
+
+void SoundGo::Music()
+{
+    music.play();
 }

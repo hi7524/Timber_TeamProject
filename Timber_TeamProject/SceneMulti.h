@@ -1,5 +1,7 @@
 #pragma once
+#include <SFML/Audio.hpp>
 #include "Scene.h"
+#include "SoundGo.h"
 
 class Player;
 class Tree;
@@ -14,6 +16,13 @@ protected:
 	Tree* tree2;
 	UiHud2* uiHud2;
 	UiMenu* uiMenu;
+
+	SoundGo* chopSound = nullptr;
+	SoundGo* deathSound = nullptr;
+	SoundGo* timeSound = nullptr;
+
+	sf::Sound sound;
+	sf::Music backgroundMusic;
 
 	bool isPlaying = true;
 	bool isShowMenu = false;

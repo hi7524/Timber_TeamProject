@@ -98,7 +98,6 @@ void SceneSelectModMulti::Enter()
 	textReady1->SetOrigin(Origins::MC);
 	textReady2->SetOrigin(Origins::MC);
 
-	
 
 	// 오브젝트들의 위치 설정
 	sf::Vector2f windowW = FRAMEWORK.GetWindowSizeF();

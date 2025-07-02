@@ -23,13 +23,11 @@ SceneGame::~SceneGame()
 void SceneGame::SetTimerMax(const float& time)
 {
     timerMax = time;
-    
 }
 
 void SceneGame::Init()
 {
     texIds.push_back("graphics/background.png");
-
     texIds.push_back("graphics/cloud.png");
     texIds.push_back("graphics/bee.png");
     texIds.push_back("graphics/log.png");
@@ -38,11 +36,9 @@ void SceneGame::Init()
     texIds.push_back(SCENE_MGR.selectedPlayer);
     texIds.push_back("graphics/axe.png");
     texIds.push_back("graphics/rip.png");
-
     soundIds.push_back("sound/chop.wav");
     soundIds.push_back("sound/death.wav"); 
     soundIds.push_back("sound/out_of_time.wav");
-
     fontIds.push_back("fonts/KOMIKAP_.ttf");
 
     AddGameObject(new SpriteGo("graphics/background.png"));
@@ -112,7 +108,6 @@ void SceneGame::Exit()
 void SceneGame::Update(float dt)
 {
     Scene::Update(dt);
-
     // ¸Þ´º
     if (escape)
     {
@@ -125,7 +120,6 @@ void SceneGame::Update(float dt)
             uiMenu->SetIsShowMenu(isShowMenu);
         }
     }
-   
     if (isShowMenu)
     {
         if (InputMgr::GetKeyDown(sf::Keyboard::Up))
@@ -148,7 +142,6 @@ void SceneGame::Update(float dt)
             }
         }
     }
-
     if (isPlaying)
     {
         if (InputMgr::GetKeyDown(sf::Keyboard::Left))
@@ -163,7 +156,6 @@ void SceneGame::Update(float dt)
                 isPlaying = false;
                 FRAMEWORK.SetTimeScale(0.f);
                 player->SetAlive(false);
-                
                 uiHud->SetShowMassage(true);
                 uiHud->SetMessage("Enter to Restart!");
             }
@@ -191,7 +183,6 @@ void SceneGame::Update(float dt)
                 isPlaying = false;
                 FRAMEWORK.SetTimeScale(0.f);
                 player->SetAlive(false);
-                
                 uiHud->SetShowMassage(true);
                 uiHud->SetMessage("Enter to Restart!");
             }
@@ -206,10 +197,10 @@ void SceneGame::Update(float dt)
                 }
             }
         }
-
         player->SetDrawAxe(InputMgr::GetKey(sf::Keyboard::Left) || InputMgr::GetKey(sf::Keyboard::Right));
         
         timer -= dt;
+
         if (timer <= 0.f)
         {   
             timer = 0.f;
@@ -243,7 +234,5 @@ void SceneGame::Update(float dt)
             log->SetLogAc(true);
             log->DisableLog();
         }
-        
-
     }
 }

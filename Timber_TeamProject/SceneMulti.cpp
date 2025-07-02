@@ -2,6 +2,7 @@
 #include "SceneMulti.h"
 #include "SpriteGo.h"
 #include "TextGo.h"
+#include "SoundGo.h"
 #include "BackgroundElement.h"
 #include "Tree.h"
 #include "Player.h"
@@ -25,7 +26,9 @@ void SceneMulti::Init()
 	texIds.push_back("graphics/player2.png");
 	texIds.push_back("graphics/axe.png");
 	fontIds.push_back("fonts/KOMIKAP_.ttf");
-
+	soundIds.push_back("sound/chop.wav");
+	soundIds.push_back("sound/death.wav");
+	soundIds.push_back("sound/out_of_time.wav");
 
 	// 오브젝트 추가 (배경 요소)
 	AddGameObject(new SpriteGo("graphics/background.png"));
@@ -48,6 +51,9 @@ void SceneMulti::Init()
 	tree1 = (Tree*)AddGameObject(new Tree());
 	tree2 = (Tree*)AddGameObject(new Tree());
 
+	deathSound = (SoundGo*)AddGameObject(new SoundGo("sound/death.wav"));
+	timeSound = (SoundGo*)AddGameObject(new SoundGo("sound/out_of_time.wav"));
+
 	player1 = (Player*)AddGameObject(new Player(SCENE_MGR.selectedPlayer1));
 	player2 = (Player*)AddGameObject(new Player(SCENE_MGR.selectedPlayer2));
 
@@ -55,13 +61,20 @@ void SceneMulti::Init()
 	uiMenu = (UiMenu*)AddGameObject(new UiMenu());
 	score1 = 0;
 	score2 = 0;
-	Scene::Init();
 
+	if (!backgroundMusic.openFromFile("sound/forest.wav"))
+	{
+		std::cout << "Fail" << std::endl;
+	}
+	else
+	{
+		std::cout << "load" << std::endl;
+	}
+	Scene::Init();
 }
 
 void SceneMulti::Enter()
 {
-
 	Scene::Enter();
 	isShowMenu = false;
 	isPlaying = true;
@@ -89,11 +102,32 @@ void SceneMulti::Enter()
 	// UI
 	timer = timerMax;
 	uiHud2->SetTimeBar(timer / timerMax);
+
+	deathSound->Reset();
+	timeSound->Reset();
+	backgroundMusic.stop();
+	if (isPlaying && !isShowMenu)
+	{
+		backgroundMusic.play();
+	}
+
 }
 
 void SceneMulti::Update(float dt)
 {
 	Scene::Update(dt);
+
+	// 배경음악
+	if (isPlaying && !isShowMenu)
+	{
+		if (backgroundMusic.getStatus() != sf::SoundSource::Status::Playing)
+			backgroundMusic.play();
+	}
+	else
+	{
+		backgroundMusic.stop();
+	}
+
 	// 메뉴
 	if (InputMgr::GetKeyDown(sf::Keyboard::Escape) && escape)
 	{
@@ -140,30 +174,26 @@ void SceneMulti::Update(float dt)
 		{
 			uiHud2->SetShowTitle(false);
 			uiHud2->SetShowDetail(false);
+			backgroundMusic.stop();
+			backgroundMusic.play();
 		}
-		
 		/*uiHud2->SetTitleMessage("Pause");
 		uiHud2->SetDetailMessage("Press Enter Key to Restart");*/
 		/*uiHud2->SetShowTitle(true);
-		uiHud2->SetShowDetail(true);*/
-		
+		uiHud2->SetShowDetail(true);*/	
 	}
-
 	if (isPlaying)
 	{
 		// 플레이
 		FRAMEWORK.SetTimeScale(1);
 		timer -= dt;
-
 		// 타이머
 		uiHud2->SetTimeBar(timer / timerMax);
-
 		// 제한시간 마감 후
 		if (timer <= 0)
 		{
 			timer = 0;
 			isPlaying = false;
-
 			// 점수에 따른 결과 출력
 			if (score1 > score2)
 			{
@@ -185,7 +215,6 @@ void SceneMulti::Update(float dt)
 				escape = false;
 				seungYeonCheck = true;
 			}
-
 			uiHud2->SetShowTitle(true);
 			uiHud2->SetShowDetail(true);
 		}
@@ -194,15 +223,12 @@ void SceneMulti::Update(float dt)
 			uiHud2->SetShowTitle(false);
 			uiHud2->SetShowDetail(false);
 		}
-
-
 		// 플레이어 1 조작
 		if (InputMgr::GetKeyDown(sf::Keyboard::A))
 		{
 			tree1->UpdateBranches();
 			player1->SetSide(Sides::Left);
 			player1->SetDrawAxe(true);
-
 			// 충돌 체크
 			if (tree1->GetSide() == player1->GetSide())
 			{
@@ -216,7 +242,6 @@ void SceneMulti::Update(float dt)
 			{
 				score1 += 10;
 			}
-
 			// Score UI 업데이트
 			uiHud2->SetScore(score1, 1);
 		}
@@ -226,7 +251,6 @@ void SceneMulti::Update(float dt)
 			tree1->UpdateBranches();
 			player1->SetSide(Sides::Right);
 			player1->SetDrawAxe(true);
-
 			// 충돌 체크
 			if (tree1->GetSide() == player1->GetSide())
 			{
@@ -243,19 +267,16 @@ void SceneMulti::Update(float dt)
 			// Score UI 업데이트
 			uiHud2->SetScore(score1, 1);
 		}
-
 		if (InputMgr::GetKeyUp(sf::Keyboard::A) || InputMgr::GetKeyUp(sf::Keyboard::D))
 		{
 			player1->SetDrawAxe(false);
 		}
-
 		// 플레이어 2 조작
 		if (InputMgr::GetKeyDown(sf::Keyboard::Left))
 		{
 			tree2->UpdateBranches();
 			player2->SetSide(Sides::Left);
 			player2->SetDrawAxe(true);
-
 			// 충돌 체크
 			if (tree2->GetSide() == player2->GetSide())
 			{
@@ -269,17 +290,14 @@ void SceneMulti::Update(float dt)
 			{
 				score2 += 10;
 			}
-
 			// Score UI 업데이트
 			uiHud2->SetScore(score2, 2);
 		}
-
 		if (InputMgr::GetKeyDown(sf::Keyboard::Right))
 		{
 			tree2->UpdateBranches();
 			player2->SetSide(Sides::Right);
 			player2->SetDrawAxe(true);
-
 			// 충돌 체크
 			if (tree2->GetSide() == player2->GetSide())
 			{
@@ -293,11 +311,9 @@ void SceneMulti::Update(float dt)
 			{
 				score2 += 10;
 			}
-
 			// Score UI 업데이트
 			uiHud2->SetScore(score2, 2);
 		}
-
 		if (InputMgr::GetKeyUp(sf::Keyboard::Left) || InputMgr::GetKeyUp(sf::Keyboard::Right))
 		{
 			player2->SetDrawAxe(false);
