@@ -7,8 +7,7 @@
 #include "Single.h"
 #include "SceneMulti.h"
 #include "SceneSeletMod.h"
-#include "SceneDifficultyManager.h"
-#include "SceneSelectModMulti.h"
+
 
 
 void SceneMgr::Init()
