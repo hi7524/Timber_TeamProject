@@ -13,7 +13,7 @@ protected:
 	std::vector<sf::Vector2f> scales;
 	std::vector<sf::Vector2f> axePositions;
 
-	std::string texPlayerId;
+	std::string playerTexId;
 	std::string ripTexId;
 	std::string axeTexId;
 
@@ -21,7 +21,7 @@ protected:
 	bool drawAxe = false;
 
 public:
-	Player(const std::string& name = "");
+	Player(const std::string& textureId);
 	~Player() override = default;
 	
 	void SetAlive(bool alive);

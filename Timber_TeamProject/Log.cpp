@@ -48,22 +48,26 @@ void Log::Reset()
 
 void Log::Update(float dt)
 {
-	if (InputMgr::GetKeyDown(sf::Keyboard::Left))
+	if (logActive)
 	{
-		isLogActive[logIdxCount] = true;
-		sprite[logIdxCount].setPosition(800.f, 800.f);
-		logDirection[logIdxCount] = { 1.f,-1.f };
-		logVelocity[logIdxCount] = logDirection[logIdxCount] * logSpeed;
-		logIdxCount++;
+		if (InputMgr::GetKeyDown(sf::Keyboard::Left))
+		{
+			isLogActive[logIdxCount] = true;
+			sprite[logIdxCount].setPosition(800.f, 800.f);
+			logDirection[logIdxCount] = { 1.f,-1.f };
+			logVelocity[logIdxCount] = logDirection[logIdxCount] * logSpeed;
+			logIdxCount++;
+		}
+		if (InputMgr::GetKeyDown(sf::Keyboard::Right))
+		{
+			isLogActive[logIdxCount] = true;
+			sprite[logIdxCount].setPosition(800.f, 800.f);
+			logDirection[logIdxCount] = { -1.f,-1.f };
+			logVelocity[logIdxCount] = logDirection[logIdxCount] * logSpeed;
+			logIdxCount++;
+		}
 	}
-	if (InputMgr::GetKeyDown(sf::Keyboard::Right))
-	{
-		isLogActive[logIdxCount] = true;
-		sprite[logIdxCount].setPosition(800.f, 800.f);
-		logDirection[logIdxCount] = { -1.f,-1.f };
-		logVelocity[logIdxCount] = logDirection[logIdxCount] * logSpeed;
-		logIdxCount++;
-	}
+	
 	for (int i = 0; i < logSize; i++)
 	{
 		if (!isLogActive[i]) 

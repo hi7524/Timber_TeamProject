@@ -16,11 +16,11 @@ void SceneTitle::Init()
 	sf::Vector2f teamNamePos = { bounds.width * 0.5f,bounds.height * 0.5f };
 	sf::Vector2f singlePlayPos = { bounds.width * 0.2f,bounds.height * 0.8f };
 	sf::Vector2f multiPlayPos = { bounds.width * 0.8f,bounds.height * 0.8f };
-	
+
 	fontIds.push_back("fonts/KOMIKAP_.ttf");
-	texIds.push_back("graphics/Title.png");
-	
-	
+	texIds.push_back("graphics/background.png");
+
+
 	title->SetString("TIM BER");
 	title->SetCharacterSize(200);
 	title->SetFillColor(sf::Color::Black);
@@ -33,11 +33,13 @@ void SceneTitle::Init()
 	teamName->SetOrigin(Origins::MC);
 	teamName->SetPosition(teamNamePos);
 
+
 	singlePlay->SetString("SinglePlay");
 	singlePlay->SetCharacterSize(100);
 	singlePlay->SetFillColor(sf::Color::Black);
 	singlePlay->SetOrigin(Origins::MC);
 	singlePlay->SetPosition(singlePlayPos);
+
 
 	multiPlay->SetString("MultiPlay");
 	multiPlay->SetCharacterSize(100);
@@ -46,12 +48,12 @@ void SceneTitle::Init()
 	multiPlay->SetPosition(multiPlayPos);
 
 
-	AddGameObject(new SpriteGo("graphics/Title.png"));
+	AddGameObject(new SpriteGo("graphics/background.png"));
 	AddGameObject(title);
 	AddGameObject(teamName);
 	AddGameObject(singlePlay);
 	AddGameObject(multiPlay);
-	
+
 	Scene::Init();
 }
 
@@ -71,11 +73,11 @@ void SceneTitle::Update(float dt)
 	{
 		if (singlePlay->GetFillColor() == sf::Color::Red)
 		{
-			SCENE_MGR.ChangeScene(SceneIds::Game);
+			SCENE_MGR.ChangeScene(SceneIds::Single);
 		}
 		else if (multiPlay->GetFillColor() == sf::Color::Red)
 		{
-			SCENE_MGR.ChangeScene(SceneIds::Dev2);
+			SCENE_MGR.ChangeScene(SceneIds::Multi);
 		}
 	}
 }
