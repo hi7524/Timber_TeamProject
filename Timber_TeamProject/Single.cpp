@@ -2,8 +2,7 @@
 #include "Single.h"
 #include "SpriteGo.h"
 
-Single::Single()
-    : Scene(SceneIds::Single)
+Single::Single() : Scene(SceneIds::Single)
 {
 }
 
