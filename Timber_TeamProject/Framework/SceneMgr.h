@@ -14,6 +14,8 @@ protected:
 	SceneIds nextScene = SceneIds::None;
 
 public:
+	std::string selectedPlayer;
+
 	void Init();
 	void Release();
 
@@ -26,4 +28,3 @@ public:
 };
 
 #define SCENE_MGR (SceneMgr::Instance())
-

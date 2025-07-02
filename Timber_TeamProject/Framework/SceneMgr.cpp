@@ -4,9 +4,12 @@
 #include "SceneTitle.h"
 #include "SceneDev1.h"
 #include "SceneDev2.h"
+#include "Single.h"
 
 void SceneMgr::Init()
 {
+	scenes.push_back(new SceneTitle());
+	scenes.push_back(new Single());
 	scenes.push_back(new SceneTitle());
 	scenes.push_back(new SceneGame());
 	scenes.push_back(new SceneDev1());
@@ -14,7 +17,11 @@ void SceneMgr::Init()
 
 	for (auto scene : scenes)
 	{
-		scene->Init();
+		if ((int)scene->Id == (int)startScene)
+		{
+			scene->Init();
+			scene->Enter();
+		}
 	}
 
 	currentScene = startScene;
@@ -47,6 +54,7 @@ void SceneMgr::Update(float dt)
 		scenes[(int)currentScene]->Exit();
 		currentScene = nextScene;
 		nextScene = SceneIds::None;
+		scenes[(int)currentScene]->Init();
 		scenes[(int)currentScene]->Enter();
 	}
 
