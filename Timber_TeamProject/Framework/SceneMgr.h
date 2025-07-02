@@ -15,6 +15,8 @@ protected:
 
 public:
 	std::string selectedPlayer;
+	std::string selectedPlayer1;
+	std::string selectedPlayer2;
 
 	void Init();
 	void Release();

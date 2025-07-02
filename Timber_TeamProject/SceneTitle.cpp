@@ -77,7 +77,7 @@ void SceneTitle::Update(float dt)
 		}
 		else if (multiPlay->GetFillColor() == sf::Color::Red)
 		{
-			SCENE_MGR.ChangeScene(SceneIds::Multi);
+			SCENE_MGR.ChangeScene(SceneIds::CharChoiceMulti);
 		}
 	}
 }

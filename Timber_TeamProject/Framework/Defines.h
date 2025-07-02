@@ -20,6 +20,7 @@ enum class SceneIds
 	Game,
 	Dev1,
 	Dev2,
+	CharChoiceMulti,
 	Count,
 };
 
