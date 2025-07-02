@@ -2,7 +2,6 @@
 #include "SceneGame.h"
 #include "SpriteGo.h"
 #include "TextGo.h"
-#include "SoundGo.h"
 #include "BackgroundElement.h"
 #include "Tree.h"
 #include "Player.h"
@@ -30,11 +29,9 @@ void SceneGame::Init()
     texIds.push_back("graphics/axe.png");
     texIds.push_back("graphics/rip.png");
 
-    soundIds.push_back("sound/chop.wav");
-    soundIds.push_back("sound/death.wav"); 
-    soundIds.push_back("sound/out_of_time.wav");
-
     fontIds.push_back("fonts/KOMIKAP_.ttf");
+
+    
 
     AddGameObject(new SpriteGo("graphics/background.png"));
     
@@ -44,10 +41,6 @@ void SceneGame::Init()
     }
 
     tree = (Tree*)AddGameObject(new Tree());
-
-    chopSound = (SoundGo*)AddGameObject(new SoundGo("sound/chop.wav"));
-    deathSound = (SoundGo*)AddGameObject(new SoundGo("sound/death.wav"));
-    timeSound = (SoundGo*)AddGameObject(new SoundGo("sound/out_of_time.wav"));
 
     BackgroundElement* element = (BackgroundElement*)AddGameObject(new BackgroundElement("graphics/bee.png"));
     element->minScale = 1.f;
@@ -60,6 +53,7 @@ void SceneGame::Init()
 
     player = (Player*)AddGameObject(new Player(SCENE_MGR.selectedPlayer));
 
+   
     log = (Log*)AddGameObject(new Log());
     uiHud = (UiHud*)AddGameObject(new UiHud());
 
@@ -83,10 +77,6 @@ void SceneGame::Enter()
 
     uiHud->SetShowMassage(true);
     uiHud->SetMessage("Enter to Start!");
-
-    chopSound->Reset();
-    deathSound->Reset();
-    timeSound->Reset();
 }
 
 void SceneGame::Exit()
@@ -102,12 +92,10 @@ void SceneGame::Update(float dt)
     {
         if (InputMgr::GetKeyDown(sf::Keyboard::Left))
         {
-            chopSound->Play();
             tree->UpdateBranches();
             player->SetSide(Sides::Left);
             if (tree->GetSide() == player->GetSide())
             {
-                deathSound->Play();
                 isPlaying = false;
                 FRAMEWORK.SetTimeScale(0.f);
                 player->SetAlive(false);
@@ -124,12 +112,10 @@ void SceneGame::Update(float dt)
 
         if (InputMgr::GetKeyDown(sf::Keyboard::Right))
         {
-            chopSound->Play();
             tree->UpdateBranches();
             player->SetSide(Sides::Right);
             if (tree->GetSide() == player->GetSide())
             {
-                deathSound->Play();
                 isPlaying = false;
                 FRAMEWORK.SetTimeScale(0.f);
                 player->SetAlive(false);
@@ -143,20 +129,22 @@ void SceneGame::Update(float dt)
                 uiHud->SetScore(score);
             }
         }
+
         player->SetDrawAxe(
             InputMgr::GetKey(sf::Keyboard::Left) || InputMgr::GetKey(sf::Keyboard::Right));
      
         timer -= dt;
         if (timer <= 0.f)
-        {   
+        {
             timer = 0.f;
-            
+
             isPlaying = false;
             FRAMEWORK.SetTimeScale(0.f);
             player->SetAlive(false);
-            timeSound->Play();
+
             uiHud->SetShowMassage(true);
             uiHud->SetMessage("Enter to Restart!");
+            
         }
         uiHud->SetTimeBar(timer / timerMax);
     }
@@ -178,6 +166,9 @@ void SceneGame::Update(float dt)
             uiHud->SetShowMassage(false);
             log->SetLogAc(true);
             log->DisableLog();
+           
         }
     }
+
+    
 }

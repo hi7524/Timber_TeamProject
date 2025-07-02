@@ -78,11 +78,13 @@ void Player::Reset()
 
 void Player::Update(float dt)
 {
+
 }
 
 void Player::Draw(sf::RenderWindow& window)
 {
 	window.draw(sprite);
+
 	if (drawAxe)
 	{
 		window.draw(axe);

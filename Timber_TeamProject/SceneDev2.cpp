@@ -163,6 +163,7 @@ void SceneDev2::Update(float dt)
 			uiHud2->SetShowDetail(false);
 		}
 
+
 		// 플레이어 1 조작
 		if (InputMgr::GetKeyDown(sf::Keyboard::A))
 		{
@@ -183,6 +184,7 @@ void SceneDev2::Update(float dt)
 			{
 				score1 += 10;
 			}
+
 			// Score UI 업데이트
 			uiHud2->SetScore(score1, 1);
 		}
@@ -192,6 +194,7 @@ void SceneDev2::Update(float dt)
 			tree1->UpdateBranches();
 			player1->SetSide(Sides::Right);
 			player1->SetDrawAxe(true);
+
 			// 충돌 체크
 			if (tree1->GetSide() == player1->GetSide())
 			{
@@ -205,6 +208,7 @@ void SceneDev2::Update(float dt)
 			{
 				score1 += 10;
 			}
+
 			// Score UI 업데이트
 			uiHud2->SetScore(score1, 1);
 		}
@@ -213,6 +217,7 @@ void SceneDev2::Update(float dt)
 		{
 			player1->SetDrawAxe(false);
 		}
+
 		// 플레이어 2 조작
 		if (InputMgr::GetKeyDown(sf::Keyboard::Left))
 		{

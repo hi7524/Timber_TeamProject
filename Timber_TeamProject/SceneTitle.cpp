@@ -6,6 +6,7 @@
 SceneTitle::SceneTitle()
 	: Scene(SceneIds::Title)
 {
+
 }
 
 void SceneTitle::Init()
@@ -18,6 +19,7 @@ void SceneTitle::Init()
 
 	fontIds.push_back("fonts/KOMIKAP_.ttf");
 	texIds.push_back("graphics/Title.png");
+
 
 	title->SetString("TIM BER");
 	title->SetCharacterSize(200);

@@ -9,6 +9,7 @@ protected:
 	TextGo* singlePlay = new TextGo("fonts/KOMIKAP_.ttf");
 	TextGo* multiPlay = new TextGo("fonts/KOMIKAP_.ttf");
 
+
 public:
 	SceneTitle();
 

@@ -42,6 +42,7 @@ void BackgroundElement::SetMoveType(MoveType type)
 	moveType = type;
 }
 
+
 void BackgroundElement::Reset()
 {
 	SpriteGo::Reset();
