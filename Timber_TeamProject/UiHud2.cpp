@@ -2,7 +2,6 @@
 #include "UiHud2.h"
 
 
-
 UiHud2::UiHud2(const std::string& name)
 	:GameObject(name)
 {
@@ -57,11 +56,17 @@ void UiHud2::Init()
 	sf::FloatRect bounds = FRAMEWORK.GetWindowBounds();
 
 	// 텍스트 UI 설정
+	Utils::SetOrigin(textScore1, Origins::TL);
+	Utils::SetOrigin(textScore2, Origins::TR);
+
 	textScore1.setCharacterSize(50);
 	textScore2.setCharacterSize(50);
 
 	textScore1.setFillColor(sf::Color::White);
 	textScore2.setFillColor(sf::Color::White);
+
+	textScore1.setPosition(20, 20);
+	textScore2.setPosition(1920 - 20 ,20);
 
 	textTitle.setCharacterSize(80);
 	textDetail.setCharacterSize(50);

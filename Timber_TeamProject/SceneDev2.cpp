@@ -23,7 +23,6 @@ void SceneDev2::Init()
 	texIds.push_back("graphics/branch.png");
 	texIds.push_back("graphics/player.png");
 	texIds.push_back("graphics/axe.png");
-	texIds.push_back("graphics/rip.png");
 
 	fontIds.push_back("fonts/KOMIKAP_.ttf");
 
