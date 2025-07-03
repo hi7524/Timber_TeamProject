@@ -12,27 +12,20 @@ void SceneTitle::Enter()
 	
 	AddGameObject(new SpriteGo("graphics/Title.png"));
 	title = (TextGo*)(AddGameObject(new TextGo("fonts/KOMIKAP_.ttf")));
-	teamName = (TextGo*)(AddGameObject(new TextGo("fonts/KOMIKAP_.ttf")));
 	singlePlay = (TextGo*)(AddGameObject(new TextGo("fonts/KOMIKAP_.ttf")));
 	multiPlay = (TextGo*)(AddGameObject(new TextGo("fonts/KOMIKAP_.ttf")));
 	
 	sf::FloatRect bounds = FRAMEWORK.GetWindowBounds();
-	sf::Vector2f titlePos = { bounds.width * 0.5f,bounds.height * 0.3f };
-	sf::Vector2f teamNamePos = { bounds.width * 0.5f,bounds.height * 0.5f };
+	sf::Vector2f titlePos = { bounds.width * 0.2f,bounds.height * 0.1f };
+	sf::Vector2f teamNamePos = { bounds.width * 0.8f,bounds.height * 0.3f };
 	sf::Vector2f singlePlayPos = { bounds.width * 0.2f,bounds.height * 0.8f };
 	sf::Vector2f multiPlayPos = { bounds.width * 0.8f,bounds.height * 0.8f };
 
-	title->SetString("TIM BER");
+	title->SetString("TIMBER");
 	title->SetCharacterSize(200);
 	title->SetFillColor(sf::Color::Black);
 	title->SetOrigin(Origins::MC);
 	title->SetPosition(titlePos);
-
-	teamName->SetString("TEAM NAME!");
-	teamName->SetCharacterSize(100);
-	teamName->SetFillColor(sf::Color::Black);
-	teamName->SetOrigin(Origins::MC);
-	teamName->SetPosition(teamNamePos);
 
 	singlePlay->SetString("SinglePlay");
 	singlePlay->SetCharacterSize(100);

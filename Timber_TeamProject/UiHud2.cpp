@@ -61,6 +61,8 @@ void UiHud2::Release()
 
 void UiHud2::Reset()
 {
+	sf::FloatRect bounds = FRAMEWORK.GetWindowBounds();
+
 	textScore1.setFont(FONT_MGR.Get(fontId));
 	textScore2.setFont(FONT_MGR.Get(fontId));
 	textTitle.setFont(FONT_MGR.Get(fontId));
@@ -73,9 +75,9 @@ void UiHud2::Reset()
 	Utils::SetOrigin(textScore2, Origins::TR);
 
 	textScore1.setPosition(20, 20);
-	textScore2.setPosition(1920 - 20, 20);
+	textScore2.setPosition(bounds.width -20 , 20);
 
-	sf::FloatRect bounds = FRAMEWORK.GetWindowBounds();
+	
 
 	// 텍스트 UI 설정
 
