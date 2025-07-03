@@ -11,6 +11,8 @@ protected:
 
 	sf::Text textScore1;
 	sf::Text textScore2;
+	sf::Text textHp1;
+	sf::Text textHp2;
 
 	std::string fontId;
 	bool isShowTitle;
@@ -23,6 +25,7 @@ public:
 	~UiHud2() override = default;
 
 	void SetScore(int score, int playerNum);
+	void SetHp(int hp, int playerNum);
 	void SetTitleMessage(const std::string& msg);
 	void SetDetailMessage(const std::string& msg);
 	void SetShowTitle(bool show) { isShowTitle = show; }
