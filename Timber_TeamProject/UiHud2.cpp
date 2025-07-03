@@ -24,6 +24,24 @@ void UiHud2::SetScore(int score, int playerNum)
 	}
 }
 
+void UiHud2::SetHp(int hp, int playerNum)
+{
+	if (playerNum == 1)
+	{
+		static std::string formatHp = "HP: ";
+		textHp1.setString(formatHp + std::to_string(hp));
+	}
+
+	if (playerNum == 2)
+	{
+		static std::string formatHp = "HP: ";
+		textHp2.setString(formatHp + std::to_string(hp));
+
+		Utils::SetOrigin(textHp2, Origins::TR);
+		textHp2.setPosition(1920 - 20, 70);
+	}
+}
+
 void UiHud2::SetTitleMessage(const std::string& msg)
 {
 	textTitle.setString(msg);
@@ -51,8 +69,6 @@ void UiHud2::SetTimeBar(float value)
 void UiHud2::Init()
 {
 	fontId = "fonts/KOMIKAP_.ttf";
-
-	
 }
 
 void UiHud2::Release()
@@ -65,36 +81,53 @@ void UiHud2::Reset()
 
 	textScore1.setFont(FONT_MGR.Get(fontId));
 	textScore2.setFont(FONT_MGR.Get(fontId));
+	textHp1.setFont(FONT_MGR.Get(fontId));
+	textHp2.setFont(FONT_MGR.Get(fontId));
 	textTitle.setFont(FONT_MGR.Get(fontId));
 	textDetail.setFont(FONT_MGR.Get(fontId));
 
 	SetScore(0, 1);
 	SetScore(0, 2);
 
+	SetHp(100, 1);
+	SetHp(100, 2);
+
 	Utils::SetOrigin(textScore1, Origins::TL);
 	Utils::SetOrigin(textScore2, Origins::TR);
 
+	Utils::SetOrigin(textHp1, Origins::TL);
+	Utils::SetOrigin(textHp2, Origins::TR);
+
 	textScore1.setPosition(20, 20);
-	textScore2.setPosition(bounds.width -20 , 20);
+	textScore2.setPosition(1920 - 20, 20);
 
-	
+	textHp1.setPosition(20, 70);
+	textHp2.setPosition(1920 - 20, 70);
 
-	// ÅØ½ºÆ® UI ¼³Á¤
+	sf::FloatRect bounds = FRAMEWORK.GetWindowBounds();
+
+	// ï¿½Ø½ï¿½Æ® UI ï¿½ï¿½ï¿½ï¿½
 
 
 	textScore1.setCharacterSize(50);
 	textScore2.setCharacterSize(50);
 
+	textHp1.setCharacterSize(50);
+	textHp2.setCharacterSize(50);
+
 	textScore1.setFillColor(sf::Color::White);
 	textScore2.setFillColor(sf::Color::White);
 
-	textScore1.setPosition(20, 20);
-	textScore2.setPosition(1920 - 20, 20);
+	textScore1.setFillColor(sf::Color::White);
+	textScore2.setFillColor(sf::Color::White);
+
+	textHp1.setPosition(20, 70);
+	textHp2.setPosition(1920 - 20, 70);
 
 	textTitle.setCharacterSize(80);
 	textDetail.setCharacterSize(50);
 
-	// Å¸ÀÓ¹Ù UI ¼³Á¤
+	// Å¸ï¿½Ó¹ï¿½ UI ï¿½ï¿½ï¿½ï¿½
 	timeBarSize = { 400.f, 40.f };
 	timeBar.setFillColor(sf::Color::Red);
 	timeBar.setSize(timeBarSize);
@@ -105,6 +138,9 @@ void UiHud2::Reset()
 
 	Utils::SetOrigin(textScore1, Origins::TL);
 	Utils::SetOrigin(textScore2, Origins::TR);
+
+	Utils::SetOrigin(textHp1, Origins::TL);
+	Utils::SetOrigin(textHp2, Origins::TR);
 }
 
 void UiHud2::Update(float dt)
@@ -113,11 +149,14 @@ void UiHud2::Update(float dt)
 
 void UiHud2::Draw(sf::RenderWindow& window)
 {
-	// Á¡¼ö ÅØ½ºÆ® UI
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½Æ® UI
 	window.draw(textScore1);
 	window.draw(textScore2);
 
-	// Á¤º¸ ÅØ½ºÆ® UI
+	window.draw(textHp1);
+	window.draw(textHp2);
+
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½Æ® UI
 	if (isShowTitle)
 	{
 		window.draw(textTitle);
@@ -127,6 +166,6 @@ void UiHud2::Draw(sf::RenderWindow& window)
 		window.draw(textDetail);
 	}
 
-	// Å¸ÀÓ¹Ù UI
+	// Å¸ï¿½Ó¹ï¿½ UI
 	window.draw(timeBar);
 }

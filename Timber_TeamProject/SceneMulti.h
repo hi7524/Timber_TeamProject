@@ -7,6 +7,7 @@ class Player;
 class Tree;
 class UiHud2;
 class UiMenu;
+
 class SceneMulti : public Scene
 {
 protected:
@@ -29,8 +30,13 @@ protected:
 	bool escape = true;
 	bool isMenu = true;
 	bool seungYeonCheck = false;
+
 	int score1 = 0;
 	int score2 = 0;
+
+	int hp1 = 100;
+	int hp2 = 100;
+
 
 	float timer = 0.0f;
 	float timerMax = 5.0f;

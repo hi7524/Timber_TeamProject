@@ -90,6 +90,9 @@ void SceneMulti::Enter()
 	tree1->SetPosition(tree1Pos);
 	tree2->SetPosition(tree2Pos);
 
+	hp1 = 100;
+	hp2 = 100;
+
 	// 플레이어 위치 설정
 	sf::Vector2f player1Pos = tree1->GetPosition();
 	player1Pos.y = 950.0f;
@@ -233,6 +236,7 @@ void SceneMulti::Update(float dt)
 			if (tree1->GetSide() == player1->GetSide())
 			{
 				score1 -= 20;
+				hp1 -= 20;
 				if (score1 <= 0)
 				{
 					score1 = 0;
@@ -244,6 +248,18 @@ void SceneMulti::Update(float dt)
 			}
 			// Score UI 업데이트
 			uiHud2->SetScore(score1, 1);
+			uiHud2->SetHp(hp1, 1);
+			if (hp1 <= 0)
+			{
+				isPlaying = false;
+				uiHud2->SetTitleMessage("Player 2 Winner!");
+				uiHud2->SetDetailMessage("Player 1 Died. Press Enter to Restart.");
+				uiHud2->SetShowTitle(true);
+				uiHud2->SetShowDetail(true);
+				escape = false;
+				seungYeonCheck = true;
+				return;
+			}
 		}
 
 		if (InputMgr::GetKeyDown(sf::Keyboard::D))
@@ -255,6 +271,7 @@ void SceneMulti::Update(float dt)
 			if (tree1->GetSide() == player1->GetSide())
 			{
 				score1 -= 20;
+				hp1 -= 20;
 				if (score1 <= 0)
 				{
 					score1 = 0;
@@ -266,6 +283,18 @@ void SceneMulti::Update(float dt)
 			}
 			// Score UI 업데이트
 			uiHud2->SetScore(score1, 1);
+			uiHud2->SetHp(hp1, 1);
+			if (hp1 <= 0)
+			{
+				isPlaying = false;
+				uiHud2->SetTitleMessage("Player 2 Winner!");
+				uiHud2->SetDetailMessage("Player 1 Died. Press Enter to Restart.");
+				uiHud2->SetShowTitle(true);
+				uiHud2->SetShowDetail(true);
+				escape = false;
+				seungYeonCheck = true;
+				return;
+			}
 		}
 		if (InputMgr::GetKeyUp(sf::Keyboard::A) || InputMgr::GetKeyUp(sf::Keyboard::D))
 		{
@@ -281,6 +310,7 @@ void SceneMulti::Update(float dt)
 			if (tree2->GetSide() == player2->GetSide())
 			{
 				score2 -= 20;
+				hp2 -= 20;
 				if (score2 <= 0)
 				{
 					score2 = 0;
@@ -292,6 +322,18 @@ void SceneMulti::Update(float dt)
 			}
 			// Score UI 업데이트
 			uiHud2->SetScore(score2, 2);
+			uiHud2->SetHp(hp2, 2);
+			if (hp2 <= 0)
+			{
+				isPlaying = false;
+				uiHud2->SetTitleMessage("Player 2 Winner!");
+				uiHud2->SetDetailMessage("Player 1 Died. Press Enter to Restart.");
+				uiHud2->SetShowTitle(true);
+				uiHud2->SetShowDetail(true);
+				escape = false;
+				seungYeonCheck = true;
+				return;
+			}
 		}
 		if (InputMgr::GetKeyDown(sf::Keyboard::Right))
 		{
@@ -302,6 +344,7 @@ void SceneMulti::Update(float dt)
 			if (tree2->GetSide() == player2->GetSide())
 			{
 				score2 -= 20;
+				hp2 -= 20;
 				if (score2 <= 0)
 				{
 					score2 = 0;
@@ -313,6 +356,19 @@ void SceneMulti::Update(float dt)
 			}
 			// Score UI 업데이트
 			uiHud2->SetScore(score2, 2);
+			uiHud2->SetHp(hp2, 2);
+			if (hp2 <= 0)
+			{
+				isPlaying = false;
+				uiHud2->SetTitleMessage("Player 2 Winner!");
+				uiHud2->SetDetailMessage("Player 1 Died. Press Enter to Restart.");
+				uiHud2->SetShowTitle(true);
+				uiHud2->SetShowDetail(true);
+				escape = false;
+				seungYeonCheck = true;
+				return;
+			}
+
 		}
 		if (InputMgr::GetKeyUp(sf::Keyboard::Left) || InputMgr::GetKeyUp(sf::Keyboard::Right))
 		{
