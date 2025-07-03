@@ -173,6 +173,8 @@ void SceneMulti::Update(float dt)
 			escape = true;
 			hp1 = 100;
 			hp2 = 100;
+			score1 = 0;
+			score2 = 0;
 			uiHud2->Reset();
 		}
 		if (isPlaying)
@@ -253,6 +255,8 @@ void SceneMulti::Update(float dt)
 			uiHud2->SetHp(hp1, 1);
 			if (hp1 <= 0)
 			{
+				score1 = 0;
+				score2 = 0;
 				isPlaying = false;
 				uiHud2->SetTitleMessage("Player 2 Winner!");
 				uiHud2->SetDetailMessage("Player 1 Died. Press Enter to Restart.");
@@ -327,6 +331,8 @@ void SceneMulti::Update(float dt)
 			uiHud2->SetHp(hp2, 2);
 			if (hp2 <= 0)
 			{
+				score1 = 0;
+				score2 = 0;
 				isPlaying = false;
 				uiHud2->SetTitleMessage("Player 2 Winner!");
 				uiHud2->SetDetailMessage("Player 1 Died. Press Enter to Restart.");
