@@ -171,6 +171,8 @@ void SceneMulti::Update(float dt)
 			isPlaying = !isPlaying;
 			seungYeonCheck = false;
 			escape = true;
+			hp1 = 100;
+			hp2 = 100;
 			uiHud2->Reset();
 		}
 		if (isPlaying)

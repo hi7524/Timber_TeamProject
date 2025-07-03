@@ -104,7 +104,7 @@ void UiHud2::Reset()
 	textHp1.setPosition(20, 70);
 	textHp2.setPosition(1920 - 20, 70);
 
-	sf::FloatRect bounds = FRAMEWORK.GetWindowBounds();
+
 
 	// �ؽ�Ʈ UI ����
 
